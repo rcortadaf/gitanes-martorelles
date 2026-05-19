@@ -25,7 +25,7 @@
     img { max-width: 100%; display: block; }
     ul { list-style: none; }
 
-    /* ===================== COLOR VARIABLES ===================== */
+    /* ===================== VARIABLES ===================== */
     :root {
       --primary: #c0392b;
       --primary-dark: #96281b;
@@ -63,13 +63,7 @@
       color: var(--primary);
       display: flex; align-items: center; gap: 10px;
     }
-    .nav-logo .logo-icon {
-      width: 38px; height: 38px;
-      background: var(--primary);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: white; font-size: 1.1rem;
-    }
+    .nav-logo img { width: 40px; height: 40px; object-fit: contain; }
     .nav-links { display: flex; gap: 6px; align-items: center; }
     .nav-links a {
       padding: 8px 16px; border-radius: 8px;
@@ -105,28 +99,42 @@
       .nav-links a { padding: 12px 16px; width: 100%; border-radius: 8px; }
     }
 
-    /* ===================== HERO ===================== */
+    /* ===================== HERO CAROUSEL ===================== */
     .hero {
+      position: relative;
       min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      text-align: center;
-      padding: 100px 24px 60px;
-      background: linear-gradient(135deg, #1a1a2e 0%, #2d1f3d 50%, #4a1942 100%);
-      color: white; position: relative; overflow: hidden;
+      overflow: hidden;
     }
-    .hero::before {
-      content: ''; position: absolute; inset: 0;
-      background:
-        radial-gradient(circle at 20% 80%, rgba(192,57,43,0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(230,126,34,0.3) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(240,192,64,0.1) 0%, transparent 70%);
-      animation: heroPulse 8s ease-in-out infinite;
+    .carousel {
+      position: absolute; inset: 0; z-index: 0;
     }
-    @keyframes heroPulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
+    .carousel-track {
+      position: absolute; inset: 0;
+      transition: opacity 1s ease;
     }
-    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+    .carousel-track.active { opacity: 1; }
+    .carousel-track img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      filter: brightness(0.4);
+    }
+    .carousel-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to bottom,
+        rgba(26,26,46,0.2) 0%,
+        rgba(26,26,46,0.5) 50%,
+        rgba(26,26,46,0.85) 100%
+      );
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 100px 24px 60px;
+      color: white;
+    }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
       background: rgba(255,255,255,0.12); backdrop-filter: blur(8px);
@@ -142,16 +150,16 @@
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
       font-weight: 900; line-height: 1.1;
       margin-bottom: 20px;
-      background: linear-gradient(135deg, #fff, #f0c040);
+      background: linear-gradient(135deg, #fff, var(--gold));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
     .hero p {
       font-size: clamp(1rem, 2vw, 1.2rem);
-      opacity: 0.85; max-width: 600px; margin: 0 auto 36px;
+      opacity: 0.9; max-width: 600px; margin: 0 auto 36px;
       line-height: 1.7;
     }
     .hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
@@ -182,11 +190,40 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .hero-stat .label { font-size: 0.85rem; opacity: 0.6; margin-top: 4px; }
+    .hero-stat .label { font-size: 0.85rem; opacity: 0.7; margin-top: 4px; }
+
+    /* Carousel indicators */
+    .carousel-indicators {
+      position: absolute; bottom: 30px; left: 50%;
+      transform: translateX(-50%); z-index: 3;
+      display: flex; gap: 8px;
+    }
+    .carousel-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.3); border: none; cursor: pointer;
+      transition: var(--transition);
+    }
+    .carousel-dot.active { background: white; transform: scale(1.3); }
+
+    /* Carousel arrows */
+    .carousel-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 3; background: rgba(0,0,0,0.3); border: none;
+      color: white; width: 48px; height: 48px; border-radius: 50%;
+      cursor: pointer; font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition); backdrop-filter: blur(4px);
+    }
+    .carousel-arrow:hover { background: rgba(0,0,0,0.5); }
+    .carousel-arrow.left { left: 20px; }
+    .carousel-arrow.right { right: 20px; }
 
     @media (max-width: 500px) {
       .hero-stats { gap: 20px; }
       .hero-stat .number { font-size: 1.8rem; }
+      .carousel-arrow { width: 36px; height: 36px; font-size: 1rem; }
+      .carousel-arrow.left { left: 10px; }
+      .carousel-arrow.right { right: 10px; }
     }
 
     /* ===================== SECTIONS COMMON ===================== */
@@ -215,8 +252,8 @@
       border-radius: 2px; margin: 16px auto 0;
     }
 
-    /* ===================== NEWS (INICI) ===================== */
-    .news-section { background: var(--light); }
+    /* ===================== NEWS ===================== */
+    .news-section { background: var(--white); }
     .news-grid {
       display: grid; gap: 24px;
       grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -228,25 +265,37 @@
       transition: var(--transition);
     }
     .news-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-    .news-card-body { padding: 28px; }
+    .news-card-img {
+      height: 220px; overflow: hidden;
+      position: relative;
+    }
+    .news-card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .news-card:hover .news-card-img img { transform: scale(1.05); }
+    .news-card-img .img-caption {
+      position: absolute; bottom: 12px; left: 12px;
+      background: rgba(0,0,0,0.7); color: white;
+      padding: 4px 12px; border-radius: 6px;
+      font-size: 0.75rem; font-weight: 500;
+    }
+    .news-card-body { padding: 24px; }
     .news-card-date {
-      display: inline-flex; align-items: center; gap: 6px;
       font-size: 0.8rem; color: var(--primary);
-      font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.5px; margin-bottom: 12px;
+      font-weight: 600; margin-bottom: 10px;
     }
     .news-card h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.3rem; margin-bottom: 12px;
-      color: var(--dark);
+      font-size: 1.2rem; margin-bottom: 10px; color: var(--dark);
     }
-    .news-card p { color: var(--gray); font-size: 0.95rem; line-height: 1.6; }
+    .news-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.6; }
     .news-card-meta {
-      display: flex; gap: 16px; margin-top: 16px;
-      padding-top: 16px; border-top: 1px solid #eee;
-      font-size: 0.82rem; color: var(--gray);
+      display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px;
+      padding-top: 14px; border-top: 1px solid #eee;
+      font-size: 0.8rem; color: var(--gray);
     }
-    .news-card-meta span { display: flex; align-items: center; gap: 4px; }
+    .news-meta-item { display: flex; align-items: center; gap: 4px; }
     .news-cta { text-align: center; margin-top: 40px; }
     .btn-secondary {
       background: white; color: var(--primary);
@@ -257,52 +306,50 @@
     /* ===================== CALENDARI ===================== */
     .cal-list { display: flex; flex-direction: column; gap: 16px; }
     .cal-item {
-      display: grid; grid-template-columns: 100px 1fr;
-      gap: 24px; align-items: start;
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 20px; align-items: start;
       background: white; border-radius: var(--radius);
-      padding: 24px; box-shadow: var(--shadow);
+      padding: 20px; box-shadow: var(--shadow);
       transition: var(--transition); border-left: 4px solid var(--primary);
     }
     .cal-item:hover { transform: translateX(4px); box-shadow: var(--shadow-lg); }
-    .cal-item.featured { border-left-color: var(--gold); background: linear-gradient(135deg, #fff9f0, #fff); }
+    .cal-item.featured {
+      border-left-color: var(--accent);
+      background: linear-gradient(135deg, #fff9f0, #fff);
+    }
     .cal-date {
-      text-align: center; padding: 12px;
-      background: var(--light); border-radius: 10px;
+      text-align: center; padding: 8px;
+      background: var(--light); border-radius: 8px;
     }
     .cal-date .month {
-      font-size: 0.72rem; font-weight: 700;
+      font-size: 0.68rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: 1px;
       color: var(--primary);
     }
     .cal-date .day {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem; font-weight: 900;
+      font-size: 1.8rem; font-weight: 900;
       color: var(--dark); line-height: 1.1;
     }
     .cal-info h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.15rem; margin-bottom: 8px; color: var(--dark);
+      font-size: 1.1rem; margin-bottom: 6px; color: var(--dark);
     }
     .cal-details {
-      display: flex; flex-wrap: wrap; gap: 12px;
-      font-size: 0.85rem; color: var(--gray); margin-bottom: 8px;
+      display: flex; flex-wrap: wrap; gap: 10px;
+      font-size: 0.83rem; color: var(--gray); margin-bottom: 6px;
     }
-    .cal-detail { display: flex; align-items: center; gap: 6px; }
-    .cal-detail .icon { font-size: 1rem; }
-    .cal-colles {
-      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
-    }
+    .cal-detail { display: flex; align-items: center; gap: 4px; }
+    .cal-colles { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
     .cal-colla-tag {
-      padding: 4px 12px; border-radius: 50px;
-      font-size: 0.75rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 50px;
+      font-size: 0.72rem; font-weight: 600;
       background: rgba(192,57,43,0.08); color: var(--primary);
     }
-    .cal-item.featured .cal-colla-tag {
-      background: rgba(230,126,34,0.1); color: var(--accent);
-    }
+
     @media (max-width: 500px) {
-      .cal-item { grid-template-columns: 80px 1fr; gap: 16px; }
-      .cal-date .day { font-size: 1.5rem; }
+      .cal-item { grid-template-columns: 60px 1fr; gap: 14px; padding: 16px; }
+      .cal-date .day { font-size: 1.3rem; }
     }
 
     /* ===================== COLLES ===================== */
@@ -312,41 +359,106 @@
     }
     .colla-card {
       background: white; border-radius: var(--radius);
-      padding: 36px 28px; text-align: center;
+      overflow: hidden;
       box-shadow: var(--shadow); transition: var(--transition);
-      position: relative; overflow: hidden;
+      position: relative;
     }
     .colla-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-    .colla-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 4px;
+    .colla-card-img {
+      height: 200px; overflow: hidden; position: relative;
     }
-    .colla-card.petits::before { background: #3498db; }
-    .colla-card.mitjans::before { background: #2ecc71; }
-    .colla-card.joves::before { background: var(--accent); }
-    .colla-card.grans::before { background: var(--primary); }
-    .colla-emoji {
-      font-size: 3rem; margin-bottom: 16px;
-      display: block;
+    .colla-card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
     }
-    .colla-card h3 {
+    .colla-card:hover .colla-card-img img { transform: scale(1.08); }
+    .colla-card-img .colla-badge {
+      position: absolute; top: 12px; right: 12px;
+      padding: 6px 14px; border-radius: 50px;
+      font-size: 0.75rem; font-weight: 700; color: white;
+      backdrop-filter: blur(4px);
+    }
+    .colla-card.petits .colla-badge { background: rgba(52,152,219,0.9); }
+    .colla-card.mitjans .colla-badge { background: rgba(46,204,113,0.9); }
+    .colla-card.joves .colla-badge { background: rgba(230,126,34,0.9); }
+    .colla-card.grans .colla-badge { background: rgba(192,57,43,0.9); }
+    .colla-card-body { padding: 20px; text-align: center; }
+    .colla-card-body h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.3rem; margin-bottom: 8px; color: var(--dark);
+      font-size: 1.2rem; margin-bottom: 6px; color: var(--dark);
     }
     .colla-count {
-      font-size: 2.5rem; font-weight: 900;
+      font-size: 2rem; font-weight: 900;
       font-family: 'Playfair Display', serif;
-      color: var(--primary); margin: 12px 0 4px;
+      color: var(--primary); margin: 6px 0 2px;
     }
-    .colla-card .label { font-size: 0.85rem; color: var(--gray); }
+    .colla-card-body .label { font-size: 0.82rem; color: var(--gray); }
     .colla-trainings {
-      margin-top: 16px; padding-top: 16px; border-top: 1px solid #eee;
-      font-size: 0.85rem; color: var(--gray);
+      margin-top: 12px; padding-top: 12px; border-top: 1px solid #eee;
+      font-size: 0.82rem; color: var(--gray); line-height: 1.5;
     }
     .colla-trainings strong { color: var(--dark); }
 
-    /* ===================== MEDIA (FOTOS/VIDEOS) ===================== */
-    .media-section { background: var(--dark); color: white; border-radius: 0; max-width: 100%; padding: 80px 24px; }
+    /* ===================== BANNER/INTERLUDE ===================== */
+    .banner-interlude {
+      position: relative; overflow: hidden;
+      padding: 80px 24px; text-align: center; color: white;
+    }
+    .banner-interlude img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; filter: brightness(0.35) blur(1px);
+    }
+    .banner-interlude .content { position: relative; z-index: 1; }
+    .banner-interlude h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .banner-interlude p { max-width: 600px; margin: 0 auto; opacity: 0.9; font-size: 1.1rem; }
+
+    /* ===================== GALLERY / MOSAIC ===================== */
+    .gallery-section { background: var(--white); }
+    .gallery-mosaic {
+      display: grid; gap: 12px;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 200px;
+      grid-auto-flow: dense;
+    }
+    .gallery-item {
+      position: relative; overflow: hidden;
+      border-radius: var(--radius); cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.1); }
+    .gallery-item .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.3s ease;
+      display: flex; align-items: flex-end; padding: 16px;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay span { color: white; font-size: 0.85rem; font-weight: 600; }
+    /* Mosaic sizes */
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item.big { grid-column: span 2; grid-row: span 2; }
+
+    @media (max-width: 768px) {
+      .gallery-mosaic {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 160px;
+      }
+      .gallery-item.big { grid-column: span 2; grid-row: span 1; }
+    }
+
+    /* ===================== MEDIA (SOCIAL) ===================== */
+    .media-section {
+      background: var(--dark);
+      max-width: 100%; padding: 80px 24px;
+    }
     .media-inner { max-width: 1200px; margin: 0 auto; }
     .media-grid {
       display: grid; gap: 24px;
@@ -360,8 +472,8 @@
     }
     .media-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
     .media-icon { font-size: 3.5rem; margin-bottom: 16px; }
-    .media-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 10px; }
-    .media-card p { opacity: 0.7; margin-bottom: 20px; font-size: 0.95rem; }
+    .media-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 10px; color: white; }
+    .media-card p { color: rgba(255,255,255,0.6); margin-bottom: 20px; font-size: 0.95rem; }
     .btn-white {
       background: white; color: var(--dark); font-weight: 600;
       border-radius: 50px; padding: 12px 28px;
@@ -404,7 +516,7 @@
     .download-info h4 { font-size: 0.95rem; color: var(--dark); margin-bottom: 2px; }
     .download-info span { font-size: 0.8rem; color: var(--gray); }
 
-    /* Zona Socis privada */
+    /* Private area */
     .socis-private-overlay {
       display: none; position: fixed; inset: 0; z-index: 2000;
       background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
@@ -413,7 +525,7 @@
     .socis-private-overlay.active { display: flex; }
     .socis-login {
       background: white; border-radius: var(--radius);
-      padding: 40px; width: 100%; max-width: 420px;
+      padding: 40px; width: 100%; max-width: 420px; margin: 20px;
       box-shadow: var(--shadow-lg); position: relative;
     }
     .socis-login .close-btn {
@@ -443,30 +555,23 @@
       text-align: center; display: none; margin-bottom: 12px;
     }
     .socis-login .error-msg.show { display: block; }
-
-    /* Socis private content */
     .socis-private-content {
       display: none; max-width: 900px; margin: 32px auto 0;
       padding: 32px; background: white; border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
     .socis-private-content.active { display: block; }
-    .socis-private-content h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; margin-bottom: 16px; color: var(--dark);
-    }
+    .socis-private-content h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 16px; }
     .socis-private-content .doc-list { display: grid; gap: 12px; }
     .socis-private-content .doc-item {
       padding: 16px 20px; background: var(--light); border-radius: 8px;
       display: flex; align-items: center; gap: 12px;
       border-left: 3px solid var(--primary);
     }
-    .socis-private-content .doc-item span { font-size: 0.9rem; }
     .socis-private-content .logout-btn {
       margin-top: 20px; background: var(--light); color: var(--gray);
       border: none; padding: 10px 24px; border-radius: 8px;
-      cursor: pointer; font-size: 0.85rem; font-family: inherit;
-      transition: var(--transition);
+      cursor: pointer; font-size: 0.85rem; font-family: inherit; transition: var(--transition);
     }
     .socis-private-content .logout-btn:hover { background: #eee; color: var(--dark); }
 
@@ -476,20 +581,21 @@
       grid-template-columns: 1fr 1fr;
     }
     @media (max-width: 700px) { .contact-grid { grid-template-columns: 1fr; } }
-    .contact-info { display: flex; flex-direction: column; gap: 24px; }
+    .contact-info { display: flex; flex-direction: column; gap: 18px; }
     .contact-card {
       background: white; border-radius: var(--radius);
-      padding: 24px; box-shadow: var(--shadow);
-      display: flex; gap: 16px; align-items: flex-start;
+      padding: 20px; box-shadow: var(--shadow);
+      display: flex; gap: 14px; align-items: flex-start;
     }
     .contact-icon {
-      width: 48px; height: 48px; border-radius: 12px;
+      width: 44px; height: 44px; border-radius: 10px;
       background: rgba(192,57,43,0.08); color: var(--primary);
       display: flex; align-items: center; justify-content: center;
       font-size: 1.2rem; flex-shrink: 0;
     }
-    .contact-card h4 { font-size: 0.95rem; margin-bottom: 4px; color: var(--dark); }
+    .contact-card h4 { font-size: 0.9rem; margin-bottom: 4px; color: var(--dark); }
     .contact-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.5; }
+
     .contact-form {
       background: white; border-radius: var(--radius);
       padding: 32px; box-shadow: var(--shadow);
@@ -498,10 +604,10 @@
       font-family: 'Playfair Display', serif;
       font-size: 1.3rem; margin-bottom: 20px; color: var(--dark);
     }
-    .form-group { margin-bottom: 16px; }
+    .form-group { margin-bottom: 14px; }
     .form-group label {
       display: block; font-size: 0.85rem; font-weight: 600;
-      color: var(--dark); margin-bottom: 6px;
+      color: var(--dark); margin-bottom: 5px;
     }
     .form-group input, .form-group textarea {
       width: 100%; padding: 12px 16px;
@@ -515,45 +621,58 @@
     .form-group textarea { resize: vertical; min-height: 120px; }
 
     /* ===================== SUGGERIMENTS ===================== */
-    .sugger-section { background: var(--light); }
     .sugger-card {
       max-width: 700px; margin: 0 auto;
       background: white; border-radius: var(--radius);
-      padding: 40px; box-shadow: var(--shadow);
+      padding: 40px; box-shadow: var(--shadow); text-align: center;
     }
-    .sugger-card .icon { font-size: 3rem; text-align: center; margin-bottom: 20px; }
+    .sugger-card .icon { font-size: 3rem; margin-bottom: 20px; }
     .sugger-card h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.5rem; text-align: center; margin-bottom: 16px; color: var(--dark);
+      font-size: 1.5rem; margin-bottom: 12px; color: var(--dark);
     }
     .sugger-card > p {
-      text-align: center; color: var(--gray); margin-bottom: 28px;
-      line-height: 1.7; font-size: 0.95rem;
+      color: var(--gray); margin-bottom: 24px; line-height: 1.7; font-size: 0.95rem;
     }
     .sugger-form textarea {
       width: 100%; padding: 16px; border: 2px solid #e5e7eb;
       border-radius: 10px; font-size: 0.95rem; font-family: inherit;
-      resize: vertical; min-height: 150px; margin-bottom: 16px;
+      resize: vertical; min-height: 140px; margin-bottom: 14px;
       transition: var(--transition); background: var(--light);
     }
-    .sugger-form textarea:focus {
-      outline: none; border-color: var(--primary); background: white;
-    }
+    .sugger-form textarea:focus { outline: none; border-color: var(--primary); background: white; }
     .sugger-form .btn { width: 100%; justify-content: center; }
+
+    /* ===================== LIGHTBOX ===================== */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 3000;
+      background: rgba(0,0,0,0.92);
+      align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 92vw; max-height: 90vh; object-fit: contain;
+      border-radius: 8px; box-shadow: 0 0 60px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 24px;
+      background: rgba(255,255,255,0.15); border: none;
+      color: white; width: 44px; height: 44px; border-radius: 50%;
+      font-size: 1.5rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
 
     /* ===================== FOOTER ===================== */
     .footer {
-      background: var(--dark); color: white;
-      padding: 50px 24px 30px;
+      background: var(--dark); color: white; padding: 50px 24px 30px;
     }
     .footer-inner {
       max-width: 1200px; margin: 0 auto;
       display: grid; gap: 40px;
       grid-template-columns: 1.5fr repeat(2, 1fr);
     }
-    @media (max-width: 700px) {
-      .footer-inner { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 700px) { .footer-inner { grid-template-columns: 1fr; } }
     .footer-brand h4 {
       font-family: 'Playfair Display', serif;
       font-size: 1.2rem; margin-bottom: 12px;
@@ -573,7 +692,7 @@
       width: 40px; height: 40px; border-radius: 10px;
       background: rgba(255,255,255,0.08);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; transition: var(--transition);
+      transition: var(--transition); font-size: 1.1rem;
     }
     .footer-social a:hover { background: var(--primary); }
     .footer-bottom {
@@ -591,10 +710,10 @@
 
     /* ===================== TOAST ===================== */
     .toast {
-      position: fixed; bottom: 30px; right: 30px;
+      position: fixed; bottom: 30px; right: 30px; z-index: 4000;
       background: var(--dark); color: white;
       padding: 14px 24px; border-radius: 10px;
-      font-size: 0.9rem; z-index: 3000;
+      font-size: 0.9rem;
       transform: translateY(120%); transition: var(--transition);
       box-shadow: var(--shadow-lg);
     }
@@ -609,14 +728,15 @@
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#inici" class="nav-logo">
-        <span class="logo-icon">💃</span>
+        <img src="images/logo.png" alt="Logo Gitanes">
         Gitanes Martorelles
       </a>
       <div class="nav-links" id="navLinks">
         <a href="#inici" class="active">Inici</a>
         <a href="#calendari">Calendari</a>
         <a href="#colles">Colles</a>
-        <a href="#media">Fotos & Videos</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#media">Xarxes</a>
         <a href="#socis">Socis</a>
         <a href="#contactar">Contactar</a>
         <a href="#suggeriments">Suggeriments</a>
@@ -627,17 +747,38 @@
     </div>
   </nav>
 
-  <!-- ==================== HERO ==================== -->
+  <!-- ==================== HERO CAROUSEL ==================== -->
   <section class="hero" id="inici">
+    <!-- Carousel images -->
+    <div class="carousel" id="carousel">
+      <div class="carousel-track active">
+        <img src="images/ballada-roda-martorelles.jpg" alt="Ballada de roda a Martorelles 2026" loading="eager">
+      </div>
+      <div class="carousel-track">
+        <img src="images/ballada-tossa-mar.jpg" alt="Ballada a Tossa de Mar 2026" loading="eager">
+      </div>
+      <div class="carousel-track">
+        <img src="images/ballada-llagosta.jpg" alt="Ballada a La Llagosta 2026" loading="eager">
+      </div>
+      <div class="carousel-track">
+        <img src="images/ballada-brunzit.jpg" alt="Festival Brunzit Martorelles" loading="eager">
+      </div>
+      <div class="carousel-track">
+        <img src="images/ballada-catalunya-miniatura.jpg" alt="Catalunya en Miniatura 2026" loading="eager">
+      </div>
+      <div class="carousel-overlay"></div>
+    </div>
+
+    <!-- Hero content -->
     <div class="hero-content">
       <div class="hero-badge">
-        <span class="dot"></span>
+        <img src="images/logo-50-anys.png" alt="50è" style="width:24px;height:24px;object-fit:contain;">
         50è Aniversari 2026
       </div>
-      <h1>Agrupació Ball de Gitanes de Martorelles</h1>
+      <h1>Agrupació Ball de Gitanes<br>de Martorelles</h1>
       <p>
-        92 balladores i balladors, 4 colles, i més de mig segle preservant la cultura popular
-        i fent poble a cada ballada.
+        92 balladores i balladors, 4 colles, i més de mig segle preservant
+        la cultura popular i fent poble a cada ballada.
       </p>
       <div class="hero-buttons">
         <a href="#calendari" class="btn btn-primary">📅 Properes Ballades</a>
@@ -662,6 +803,11 @@
         </div>
       </div>
     </div>
+
+    <!-- Carousel controls -->
+    <button class="carousel-arrow left" onclick="prevSlide()" aria-label="Anterior">‹</button>
+    <button class="carousel-arrow right" onclick="nextSlide()" aria-label="Següent">›</button>
+    <div class="carousel-indicators" id="carouselIndicators"></div>
   </section>
 
   <!-- ==================== NEWS ==================== -->
@@ -675,51 +821,61 @@
       <div class="news-grid">
 
         <div class="news-card fade-in">
+          <div class="news-card-img">
+            <img src="images/ballada-roda-martorelles.jpg" alt="Ballada de roda a Martorelles" loading="lazy">
+            <span class="img-caption">📍 La Vinya, Martorelles</span>
+          </div>
           <div class="news-card-body">
             <div class="news-card-date">📅 4 maig 2026 · Ballades</div>
             <h3>Ballada de roda a Martorelles</h3>
             <p>
               📣 La ballada de Roda de Martorelles s'apropa! En acabar la ballada, es farà
-              sopar popular a l'Espai Polivalent de la Vinya (~21:00 h). Qui vulgui assistir-hi,
-              que ho comuniqui a membres de Junta o a través de l'Instagram/correu electrònic.
+              sopar popular a l'Espai Polivalent de la Vinya (~21:00 h).
             </p>
             <div class="news-card-meta">
-              <span>📍 La Vinya, Martorelles</span>
-              <span>🕐 18:00 h</span>
-              <span>💃 Totes les colles</span>
+              <span class="news-meta-item">📍 La Vinya</span>
+              <span class="news-meta-item">🕐 18:00 h</span>
+              <span class="news-meta-item">💃 Totes les colles</span>
             </div>
           </div>
         </div>
 
         <div class="news-card fade-in">
+          <div class="news-card-img">
+            <img src="images/ballada-tossa-mar.jpg" alt="Ballada a Tossa de Mar" loading="lazy">
+            <span class="img-caption">📍 Tossa de Mar</span>
+          </div>
           <div class="news-card-body">
             <div class="news-card-date">📅 24 abril 2026 · Ballades</div>
             <h3>Ballada a Tossa de Mar</h3>
             <p>
-              📍 Dissabte 25 d'abril el Ball de Gitanes de Martorelles oferirà un espectacle
-              a Tossa de Mar. A les 11:30 hores ballarem al Passeig Mossèn Cinto Verdaguer
-              davant del mar. Us hi esperem!
+              📍 Dissabte 25 d'abril oferirem un espectacle a Tossa de Mar.
+              A les 11:30 h ballarem al Passeig Mossèn Cinto Verdaguer davant del mar.
             </p>
             <div class="news-card-meta">
-              <span>📍 Tossa de Mar</span>
-              <span>🕐 11:30 h</span>
-              <span>💃 Mitjanes, Joves, Grans</span>
+              <span class="news-meta-item">📍 Tossa de Mar</span>
+              <span class="news-meta-item">🕐 11:30 h</span>
+              <span class="news-meta-item">💃 Mitjanes, Joves, Grans</span>
             </div>
           </div>
         </div>
 
         <div class="news-card fade-in">
+          <div class="news-card-img">
+            <img src="images/ballada-llagosta.jpg" alt="Ballada a La Llagosta" loading="lazy">
+            <span class="img-caption">📍 La Llagosta — 50 Anys!</span>
+          </div>
           <div class="news-card-body">
             <div class="news-card-date">📅 18 abril 2026 · Ballades</div>
             <h3>Ballada a La Llagosta — 50 Anys!</h3>
             <p>
               Estarem a la Llagosta a celebrar els seus 50 anys! A les 10 h la Cercavila,
-              a les 11 h la ballada! Gràcies @gitanesllagosta per haver-nos convidat.
+              a les 11 h la ballada! 🎉
             </p>
             <div class="news-card-meta">
-              <span>📍 La Llagosta</span>
-              <span>🕐 11:00 h</span>
-              <span>💃 Totes les colles</span>
+              <span class="news-meta-item">📍 La Llagosta</span>
+              <span class="news-meta-item">🕐 11:00 h</span>
+              <span class="news-meta-item">💃 Totes les colles</span>
             </div>
           </div>
         </div>
@@ -731,13 +887,25 @@
     </div>
   </section>
 
+  <!-- ==================== BANNER INTERLUDE ==================== -->
+  <section class="banner-interlude">
+    <img src="images/banner-baldomero.jpg" alt="Mestre Baldomero" loading="lazy">
+    <div class="content fade-in">
+      <h2>Mestre Baldomero Costa Olivellas</h2>
+      <p>Creu de Sant Jordi, mestre de mestres del Ball de Gitanes.<br>
+        El seu llegat viu en cada balladora i ballador de Martorelles.</p>
+      <img src="images/logo-50-anys-complet.png" alt="50è Aniversari"
+           style="max-width:300px;margin:24px auto 0;border-radius:12px;box-shadow:0 4px 30px rgba(0,0,0,0.3);" loading="lazy">
+    </div>
+  </section>
+
   <!-- ==================== CALENDARI ==================== -->
   <section id="calendari">
     <div class="section">
       <div class="section-header fade-in">
         <div class="section-label">Agenda 2026</div>
         <h2 class="section-title">Calendari de Ballades</h2>
-        <p class="section-desc">Totes les dates on trobaràs el Ball de Gitanes de Martorelles aquesta temporada</p>
+        <p class="section-desc">Totes les dates on trobaràs el Ball de Gitanes de Martorelles</p>
         <div class="section-divider"></div>
       </div>
       <div class="cal-list">
@@ -747,8 +915,8 @@
           <div class="cal-info">
             <h3>Ballada de Roda — L'Ametlla del Vallès</h3>
             <div class="cal-details">
-              <div class="cal-detail"><span class="icon">📍</span> Pavelló Poliesportiu</div>
-              <div class="cal-detail"><span class="icon">🕐</span> 17:00 h</div>
+              <div class="cal-detail">📍 Pavelló Poliesportiu</div>
+              <div class="cal-detail">🕐 17:00 h</div>
             </div>
             <div class="cal-colles"><span class="cal-colla-tag">Joves</span></div>
           </div>
@@ -759,14 +927,12 @@
           <div class="cal-info">
             <h3>Ballada a Catalunya en Miniatura</h3>
             <div class="cal-details">
-              <div class="cal-detail"><span class="icon">📍</span> Torrelles de Llobregat</div>
-              <div class="cal-detail"><span class="icon">🕐</span> 12:30 h</div>
+              <div class="cal-detail">📍 Torrelles de Llobregat</div>
+              <div class="cal-detail">🕐 12:30 h</div>
             </div>
             <div class="cal-colles">
-              <span class="cal-colla-tag">Petites</span>
-              <span class="cal-colla-tag">Mitjanes</span>
-              <span class="cal-colla-tag">Joves</span>
-              <span class="cal-colla-tag">Grans</span>
+              <span class="cal-colla-tag">Petites</span><span class="cal-colla-tag">Mitjanes</span>
+              <span class="cal-colla-tag">Joves</span><span class="cal-colla-tag">Grans</span>
             </div>
           </div>
         </div>
@@ -776,34 +942,30 @@
           <div class="cal-info">
             <h3>Cercavila Mercat del Ram — Vic</h3>
             <div class="cal-details">
-              <div class="cal-detail"><span class="icon">📍</span> Plaça Major → Plaça Catedral</div>
-              <div class="cal-detail"><span class="icon">🕐</span> 17:00 h</div>
+              <div class="cal-detail">📍 Plaça Major → Plaça Catedral</div>
+              <div class="cal-detail">🕐 17:00 h</div>
             </div>
             <div class="cal-colles">
               <span class="cal-colla-tag">Mitjanes</span>
-              <span class="cal-colla-tag">Joves</span>
-              <span class="cal-colla-tag">Grans</span>
+              <span class="cal-colla-tag">Joves</span><span class="cal-colla-tag">Grans</span>
             </div>
           </div>
         </div>
 
-        <!-- FEATURED -->
         <div class="cal-item featured fade-in">
           <div class="cal-date"><div class="day">11</div><div class="month">Abr</div></div>
           <div class="cal-info">
             <h3>🎉 Festival Brunzit — Martorelles + 50è Aniversari</h3>
             <div class="cal-details">
-              <div class="cal-detail"><span class="icon">📍</span> La Vinya, Martorelles</div>
-              <div class="cal-detail"><span class="icon">🕐</span> 17:30 i 19:30</div>
+              <div class="cal-detail">📍 La Vinya, Martorelles</div>
+              <div class="cal-detail">🕐 17:30 i 19:30</div>
             </div>
-            <p style="font-size:0.85rem;color:var(--gray);margin-top:4px;">
+            <p style="font-size:0.83rem;color:var(--gray);margin-top:4px;">
               Inauguració Plaça Baldomero Costa + ball amb Sa Colla de Labritja d'Eivissa
             </p>
             <div class="cal-colles">
-              <span class="cal-colla-tag">Petits</span>
-              <span class="cal-colla-tag">Mitjans</span>
-              <span class="cal-colla-tag">Joves</span>
-              <span class="cal-colla-tag">Grans</span>
+              <span class="cal-colla-tag">Petits</span><span class="cal-colla-tag">Mitjans</span>
+              <span class="cal-colla-tag">Joves</span><span class="cal-colla-tag">Grans</span>
             </div>
           </div>
         </div>
@@ -813,14 +975,12 @@
           <div class="cal-info">
             <h3>Ballada 50è Gitanes — La Llagosta</h3>
             <div class="cal-details">
-              <div class="cal-detail"><span class="icon">📍</span> Rambla Av. Onze de Setembre</div>
-              <div class="cal-detail"><span class="icon">🕐</span> Matí-migdia</div>
+              <div class="cal-detail">📍 Rambla Av. Onze de Setembre</div>
+              <div class="cal-detail">🕐 Matí-migdia</div>
             </div>
             <div class="cal-colles">
-              <span class="cal-colla-tag">Petites</span>
-              <span class="cal-colla-tag">Mitjanes</span>
-              <span class="cal-colla-tag">Joves</span>
-              <span class="cal-colla-tag">Grans</span>
+              <span class="cal-colla-tag">Petites</span><span class="cal-colla-tag">Mitjanes</span>
+              <span class="cal-colla-tag">Joves</span><span class="cal-colla-tag">Grans</span>
             </div>
           </div>
         </div>
@@ -830,14 +990,12 @@
           <div class="cal-info">
             <h3>Ballada de Roda — Martorelles 🎪</h3>
             <div class="cal-details">
-              <div class="cal-detail"><span class="icon">📍</span> La Vinya, Martorelles</div>
-              <div class="cal-detail"><span class="icon">🕐</span> 18:00 h (Sopar popular després)</div>
+              <div class="cal-detail">📍 La Vinya, Martorelles</div>
+              <div class="cal-detail">🕐 18:00 h (Sopar popular després)</div>
             </div>
             <div class="cal-colles">
-              <span class="cal-colla-tag">Petites</span>
-              <span class="cal-colla-tag">Mitjanes</span>
-              <span class="cal-colla-tag">Joves</span>
-              <span class="cal-colla-tag">Grans</span>
+              <span class="cal-colla-tag">Petites</span><span class="cal-colla-tag">Mitjanes</span>
+              <span class="cal-colla-tag">Joves</span><span class="cal-colla-tag">Grans</span>
             </div>
           </div>
         </div>
@@ -847,7 +1005,7 @@
           <div class="cal-info">
             <h3>Ballada Gitanes 2.0 — Santa Eulàlia de Ronçana</h3>
             <div class="cal-details">
-              <div class="cal-detail"><span class="icon">📍</span> Sant Simple</div>
+              <div class="cal-detail">📍 Sant Simple</div>
             </div>
             <div class="cal-colles"><span class="cal-colla-tag">Joves</span></div>
           </div>
@@ -858,8 +1016,8 @@
           <div class="cal-info">
             <h3>Ballada a Ribes de Fresser</h3>
             <div class="cal-details">
-              <div class="cal-detail"><span class="icon">📍</span> Plaça de la Vila</div>
-              <div class="cal-detail"><span class="icon">🕐</span> Tarda</div>
+              <div class="cal-detail">📍 Plaça de la Vila</div>
+              <div class="cal-detail">🕐 Tarda</div>
             </div>
             <div class="cal-colles"><span class="cal-colla-tag">Mitjanes</span></div>
           </div>
@@ -870,14 +1028,12 @@
           <div class="cal-info">
             <h3>Ballada a Blanes</h3>
             <div class="cal-details">
-              <div class="cal-detail"><span class="icon">📍</span> Davant Biblioteca Comarcal</div>
-              <div class="cal-detail"><span class="icon">🕐</span> 19:00 h</div>
+              <div class="cal-detail">📍 Davant Biblioteca Comarcal</div>
+              <div class="cal-detail">🕐 19:00 h</div>
             </div>
             <div class="cal-colles">
-              <span class="cal-colla-tag">Petites</span>
-              <span class="cal-colla-tag">Mitjanes</span>
-              <span class="cal-colla-tag">Joves</span>
-              <span class="cal-colla-tag">Grans</span>
+              <span class="cal-colla-tag">Petites</span><span class="cal-colla-tag">Mitjanes</span>
+              <span class="cal-colla-tag">Joves</span><span class="cal-colla-tag">Grans</span>
             </div>
           </div>
         </div>
@@ -887,8 +1043,8 @@
           <div class="cal-info">
             <h3>Escaldàrium — Caldes de Montbuí</h3>
             <div class="cal-details">
-              <div class="cal-detail"><span class="icon">📍</span> Plaça del Lleó</div>
-              <div class="cal-detail"><span class="icon">🕐</span> 19:00 h</div>
+              <div class="cal-detail">📍 Plaça del Lleó</div>
+              <div class="cal-detail">🕐 19:00 h</div>
             </div>
             <div class="cal-colles"><span class="cal-colla-tag">Joves</span></div>
           </div>
@@ -897,15 +1053,13 @@
         <div class="cal-item fade-in">
           <div class="cal-date"><div class="month">Jul</div></div>
           <div class="cal-info">
-            <h3>Ballada de Festa Major — Santa Maria de Martorelles</h3>
+            <h3>Festa Major — Santa Maria de Martorelles</h3>
             <div class="cal-details">
-              <div class="cal-detail"><span class="icon">📍</span> Pavelló</div>
+              <div class="cal-detail">📍 Pavelló</div>
             </div>
             <div class="cal-colles">
-              <span class="cal-colla-tag">Petits</span>
-              <span class="cal-colla-tag">Mitjans</span>
-              <span class="cal-colla-tag">Joves</span>
-              <span class="cal-colla-tag">Grans</span>
+              <span class="cal-colla-tag">Petits</span><span class="cal-colla-tag">Mitjans</span>
+              <span class="cal-colla-tag">Joves</span><span class="cal-colla-tag">Grans</span>
             </div>
           </div>
         </div>
@@ -913,16 +1067,14 @@
         <div class="cal-item fade-in">
           <div class="cal-date"><div class="day">11</div><div class="month">Set</div></div>
           <div class="cal-info">
-            <h3>🏠 Ballada de Festa Major — Martorelles</h3>
+            <h3>🏠 Festa Major — Martorelles</h3>
             <div class="cal-details">
-              <div class="cal-detail"><span class="icon">📍</span> La Vinya, Martorelles</div>
-              <div class="cal-detail"><span class="icon">🕐</span> 19:30</div>
+              <div class="cal-detail">📍 La Vinya, Martorelles</div>
+              <div class="cal-detail">🕐 19:30</div>
             </div>
             <div class="cal-colles">
-              <span class="cal-colla-tag">Petits</span>
-              <span class="cal-colla-tag">Mitjans</span>
-              <span class="cal-colla-tag">Joves</span>
-              <span class="cal-colla-tag">Grans</span>
+              <span class="cal-colla-tag">Petits</span><span class="cal-colla-tag">Mitjans</span>
+              <span class="cal-colla-tag">Joves</span><span class="cal-colla-tag">Grans</span>
             </div>
           </div>
         </div>
@@ -930,16 +1082,14 @@
         <div class="cal-item fade-in">
           <div class="cal-date"><div class="day">17</div><div class="month">Oct</div></div>
           <div class="cal-info">
-            <h3>🎉 Ballada Commemoració 50è — Martorelles</h3>
+            <h3>🎉 Commemoració 50è — Martorelles</h3>
             <div class="cal-details">
-              <div class="cal-detail"><span class="icon">📍</span> Pavelló, Martorelles</div>
-              <div class="cal-detail"><span class="icon">🕐</span> 19:00 h</div>
+              <div class="cal-detail">📍 Pavelló, Martorelles</div>
+              <div class="cal-detail">🕐 19:00 h</div>
             </div>
             <div class="cal-colles">
-              <span class="cal-colla-tag">Petites</span>
-              <span class="cal-colla-tag">Mitjanes</span>
-              <span class="cal-colla-tag">Joves</span>
-              <span class="cal-colla-tag">Grans</span>
+              <span class="cal-colla-tag">Petites</span><span class="cal-colla-tag">Mitjanes</span>
+              <span class="cal-colla-tag">Joves</span><span class="cal-colla-tag">Grans</span>
             </div>
           </div>
         </div>
@@ -949,13 +1099,11 @@
           <div class="cal-info">
             <h3>Ballada al Tibidabo</h3>
             <div class="cal-details">
-              <div class="cal-detail"><span class="icon">📍</span> Parc d'Atraccions Tibidabo, Barcelona</div>
+              <div class="cal-detail">📍 Parc d'Atraccions, Barcelona</div>
             </div>
             <div class="cal-colles">
-              <span class="cal-colla-tag">Petits</span>
-              <span class="cal-colla-tag">Mitjans</span>
-              <span class="cal-colla-tag">Joves</span>
-              <span class="cal-colla-tag">Grans</span>
+              <span class="cal-colla-tag">Petits</span><span class="cal-colla-tag">Mitjans</span>
+              <span class="cal-colla-tag">Joves</span><span class="cal-colla-tag">Grans</span>
             </div>
           </div>
         </div>
@@ -963,6 +1111,62 @@
       </div>
     </div>
   </section>
+
+  <!-- ==================== GALERIA MOSAIC ==================== -->
+  <section class="gallery-section" id="galeria">
+    <div class="section" style="max-width:1200px;margin:0 auto;">
+      <div class="section-header fade-in">
+        <div class="section-label">Fotos</div>
+        <h2 class="section-title">Galeria d'Imatges</h2>
+        <p class="section-desc">Els millors moments del Ball de Gitanes de Martorelles</p>
+        <div class="section-divider"></div>
+      </div>
+      <div class="gallery-mosaic fade-in">
+        <div class="gallery-item big" onclick="openLightbox(this)">
+          <img src="images/ballada-brunzit.jpg" alt="Festival Brunzit" loading="lazy">
+          <div class="gallery-overlay"><span>Festival Brunzit — Martorelles</span></div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="images/ballada-roda-martorelles.jpg" alt="Ballada de Roda" loading="lazy">
+          <div class="gallery-overlay"><span>Ballada de Roda</span></div>
+        </div>
+        <div class="gallery-item tall" onclick="openLightbox(this)">
+          <img src="images/ballada-catalunya-miniatura.jpg" alt="Catalunya en Miniatura" loading="lazy">
+          <div class="gallery-overlay"><span>Catalunya en Miniatura</span></div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="images/colles-grans-50.jpg" alt="Colla de Grans" loading="lazy">
+          <div class="gallery-overlay"><span>Colla de Grans</span></div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="images/carnaval-joves.jpg" alt="Colla de Joves" loading="lazy">
+          <div class="gallery-overlay"><span>Colla de Joves</span></div>
+        </div>
+        <div class="gallery-item wide" onclick="openLightbox(this)">
+          <img src="images/colles-mitjanes-50.jpg" alt="Colla de Mitjanes" loading="lazy">
+          <div class="gallery-overlay"><span>Colla de Mitjanes</span></div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="images/carnaval-petits.jpg" alt="Colla de Petits" loading="lazy">
+          <div class="gallery-overlay"><span>Colla de Petits</span></div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="images/assaig.jpg" alt="Assaig a les Pruneres" loading="lazy">
+          <div class="gallery-overlay"><span>Assaig</span></div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="images/carnaval-grans.jpg" alt="Carnaval Grans" loading="lazy">
+          <div class="gallery-overlay"><span>Carnaval Grans</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LIGHTBOX ==================== -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" aria-label="Tancar">✕</button>
+    <img src="" alt="Preview" id="lightboxImg">
+  </div>
 
   <!-- ==================== COLLES ==================== -->
   <section id="colles">
@@ -978,46 +1182,66 @@
       <div class="colles-grid">
 
         <div class="colla-card petits fade-in">
-          <span class="colla-emoji">⭐</span>
-          <h3>Colla de Petits</h3>
-          <div class="colla-count">21</div>
-          <div class="label">balladores i balladors</div>
-          <div class="colla-trainings">
-            <strong>Assaig:</strong> Divendres 18:00–19:00<br>
-            <strong>Lloc:</strong> Escola Les Pruneres
+          <div class="colla-card-img">
+            <img src="images/colles-petits-50.jpg" alt="Colla de Petits" loading="lazy">
+            <span class="colla-badge">Petits</span>
+          </div>
+          <div class="colla-card-body">
+            <h3>Colla de Petits</h3>
+            <div class="colla-count">21</div>
+            <div class="label">balladores i balladors</div>
+            <div class="colla-trainings">
+              <strong>Divendres 18:00–19:00</strong><br>
+              Escola Les Pruneres, Martorelles
+            </div>
           </div>
         </div>
 
         <div class="colla-card mitjans fade-in">
-          <span class="colla-emoji">🌟</span>
-          <h3>Colla de Mitjans</h3>
-          <div class="colla-count">13</div>
-          <div class="label">balladores</div>
-          <div class="colla-trainings">
-            <strong>Assaig:</strong> Divendres 19:00–20:00<br>
-            <strong>Lloc:</strong> Escola Les Pruneres
+          <div class="colla-card-img">
+            <img src="images/colles-mitjanes-50.jpg" alt="Colla de Mitjanes" loading="lazy">
+            <span class="colla-badge">Mitjanes</span>
+          </div>
+          <div class="colla-card-body">
+            <h3>Colla de Mitjanes</h3>
+            <div class="colla-count">13</div>
+            <div class="label">balladores</div>
+            <div class="colla-trainings">
+              <strong>Divendres 19:00–20:00</strong><br>
+              Escola Les Pruneres, Martorelles
+            </div>
           </div>
         </div>
 
         <div class="colla-card joves fade-in">
-          <span class="colla-emoji">🔥</span>
-          <h3>Colla de Joves</h3>
-          <div class="colla-count">25</div>
-          <div class="label">balladores i balladors</div>
-          <div class="colla-trainings">
-            <strong>Assaig:</strong> Divendres 20:00–21:00<br>
-            <strong>Lloc:</strong> Escola Les Pruneres
+          <div class="colla-card-img">
+            <img src="images/colles-joves-50.jpg" alt="Colla de Joves" loading="lazy">
+            <span class="colla-badge">Joves</span>
+          </div>
+          <div class="colla-card-body">
+            <h3>Colla de Joves</h3>
+            <div class="colla-count">25</div>
+            <div class="label">balladores i balladors</div>
+            <div class="colla-trainings">
+              <strong>Divendres 20:00–21:00</strong><br>
+              Escola Les Pruneres, Martorelles
+            </div>
           </div>
         </div>
 
         <div class="colla-card grans fade-in">
-          <span class="colla-emoji">👑</span>
-          <h3>Colla de Grans</h3>
-          <div class="colla-count">33</div>
-          <div class="label">balladores i balladors</div>
-          <div class="colla-trainings">
-            <strong>Assaig:</strong> Divendres 21:30–22:30<br>
-            <strong>Lloc:</strong> Escola Les Pruneres
+          <div class="colla-card-img">
+            <img src="images/colles-grans-50.jpg" alt="Colla de Grans" loading="lazy">
+            <span class="colla-badge">Grans</span>
+          </div>
+          <div class="colla-card-body">
+            <h3>Colla de Grans</h3>
+            <div class="colla-count">33</div>
+            <div class="label">balladores i balladors</div>
+            <div class="colla-trainings">
+              <strong>Divendres 21:30–22:30</strong><br>
+              Escola Les Pruneres, Martorelles
+            </div>
           </div>
         </div>
 
@@ -1025,14 +1249,14 @@
     </div>
   </section>
 
-  <!-- ==================== MEDIA ==================== -->
+  <!-- ==================== MEDIA (SOCIAL) ==================== -->
   <section class="media-section" id="media">
     <div class="media-inner">
       <div class="section-header fade-in">
-        <div class="section-label" style="color:var(--gold);">Galeria</div>
-        <h2 class="section-title" style="color:white;">Fotos & Videos</h2>
+        <div class="section-label" style="color:var(--gold);">Segueix-nos</div>
+        <h2 class="section-title" style="color:white;">Xarxes Socials</h2>
         <p class="section-desc" style="color:rgba(255,255,255,0.6);">
-          Descobreix les millors imatges i actuacions del Ball de Gitanes
+          Descobreix les millors imatges i actuacions
         </p>
         <div class="section-divider"></div>
       </div>
@@ -1040,29 +1264,23 @@
 
         <div class="media-card fade-in">
           <div class="media-icon">📸</div>
-          <h3>Fotos</h3>
-          <p>Segueix-nos a Instagram per veure les últimes fotos de ballades, assajos i moments especials.</p>
-          <a href="https://www.instagram.com/gitanesmartorelles/" target="_blank" class="btn-white">
-            @gitanesmartorelles →
-          </a>
+          <h3>Instagram</h3>
+          <p>Fotos i reels de ballades, assajos i moments especials.</p>
+          <a href="https://www.instagram.com/gitanesmartorelles/" target="_blank" class="btn-white">@gitanesmartorelles →</a>
         </div>
 
         <div class="media-card fade-in">
-          <div class="media-icon">🎬</div>
-          <h3>Videos</h3>
-          <p>Troba els videos de les nostres actuacions al canal de YouTube oficial.</p>
-          <a href="https://www.youtube.com/@gitanesmartorelles" target="_blank" class="btn-white">
-            Canal YouTube →
-          </a>
+          <div class="media-icon">▶️</div>
+          <h3>YouTube</h3>
+          <p>Videos complets de les nostres actuacions i esdeveniments.</p>
+          <a href="https://www.youtube.com/channel/UCmYF1_oOoCkWxVrquBvrPGg" target="_blank" class="btn-white">Canal Oficial →</a>
         </div>
 
         <div class="media-card fade-in">
           <div class="media-icon">📘</div>
           <h3>Facebook</h3>
-          <p>Mantingues-te al dia de les últimes novetats i esdeveniments a la nostra pàgina.</p>
-          <a href="https://www.facebook.com/gitanesmartorelles/" target="_blank" class="btn-white">
-            Pàgina Facebook →
-          </a>
+          <p>Novetats, esdeveniments i la comunitat del Ball de Gitanes.</p>
+          <a href="https://www.facebook.com/152651568249680" target="_blank" class="btn-white">Pàgina Oficial →</a>
         </div>
 
       </div>
@@ -1083,17 +1301,16 @@
         <div class="icon">👥</div>
         <h3>Fes-te Soci!</h3>
         <p>
-          Fent-te soci col·labores directament amb l'entitat i ajudes a preservar
-          la cultura popular de Martorelles. Accedeix a avantatges exclusius i
-          documentació interna.
+          Fent-te soci col·labores amb l'entitat i ajudes a preservar
+          la cultura popular de Martorelles. Accedeix a avantatges exclusius.
         </p>
-        <a href="/images/docs/socis/documentacio_alta_soci.pdf" class="btn btn-primary" target="_blank">
+        <a href="images/documentacio_alta_soci.pdf" class="btn btn-primary" download>
           📄 Documentació Alta Soci
         </a>
       </div>
 
       <div class="download-card fade-in">
-        <a href="/images/docs/socis/documentacio_alta_soci.pdf" class="download-item" target="_blank">
+        <a href="images/documentacio_alta_soci.pdf" class="download-item" download>
           <div class="download-icon">📋</div>
           <div class="download-info">
             <h4>Documentació Alta Soci</h4>
@@ -1109,7 +1326,7 @@
         </div>
       </div>
 
-      <!-- Private content (shown after login) -->
+      <!-- Private content -->
       <div class="socis-private-content" id="socisPrivate">
         <h4>📂 Documents Interns</h4>
         <div class="doc-list">
@@ -1124,14 +1341,14 @@
     </div>
   </section>
 
-  <!-- ==================== LOGIN OVERLAY ==================== -->
+  <!-- ==================== LOGIN ==================== -->
   <div class="socis-private-overlay" id="socisOverlay">
     <div class="socis-login">
       <button class="close-btn" onclick="closeSocisLogin()">✕</button>
       <h3>🔐 Zona Privada</h3>
-      <p>Introdueix la contrasenya de soci per accedir als documents interns.</p>
+      <p>Introdueix la contrasenya de soci.</p>
       <input type="password" id="socisPassword" placeholder="Contrasenya..." onkeydown="if(event.key==='Enter')checkSocisPass()">
-      <div class="error-msg" id="socisError">Contrasenya incorrecta. Prova de nou.</div>
+      <div class="error-msg" id="socisError">Contrasenya incorrecta.</div>
       <button class="btn btn-primary" onclick="checkSocisPass()">Accedir</button>
     </div>
   </div>
@@ -1170,11 +1387,11 @@
             <div>
               <h4>Horaris d'Assaig 2026</h4>
               <p>
-                <strong>Colla de Petits:</strong> Divendres 18:00–19:00<br>
-                <strong>Colla de Mitjans:</strong> Divendres 19:00–20:00<br>
-                <strong>Colla de Joves:</strong> Divendres 20:00–21:00<br>
-                <strong>Colla de Grans:</strong> Divendres 21:30–22:30<br>
-                <em style="font-size:0.78rem;color:var(--gray);">Tots a l'Escola Les Pruneres, Martorelles</em>
+                <strong>Petits:</strong> Divendres 18:00–19:00<br>
+                <strong>Mitjans:</strong> Divendres 19:00–20:00<br>
+                <strong>Joves:</strong> Divendres 20:00–21:00<br>
+                <strong>Grans:</strong> Divendres 21:30–22:30<br>
+                <em style="font-size:0.78rem;color:var(--gray);">Escola Les Pruneres, Martorelles</em>
               </p>
             </div>
           </div>
@@ -1209,11 +1426,7 @@
   </section>
 
   <!-- ==================== SUGGERIMENTS ==================== -->
-  <section id="suggeriments">
-    <div class="section"></div>
-  </section>
-
-  <section class="sugger-section">
+  <section class="sugger-section" id="suggeriments">
     <div class="section" style="max-width:1200px;margin:0 auto;">
       <div class="section-header fade-in">
         <div class="section-label">Opinió</div>
@@ -1225,12 +1438,11 @@
         <h3>La teva opinió importa</h3>
         <p>
           La Junta del Ball de Gitanes de Martorelles treballem per preservar i fer créixer
-          la cultura popular, però això no seria el mateix sense el suport dels socis,
-          simpatitzants i balladors. Aquest espai és per a tu: escriu un suggeriment de
+          la cultura popular. Aquest espai és per a tu: escriu un suggeriment de
           millora de forma anònima.
         </p>
         <div class="sugger-form">
-          <textarea placeholder="Escriu el teu suggeriment..." id="suggerText" required></textarea>
+          <textarea placeholder="Escriu el teu suggeriment..." id="suggerText"></textarea>
           <button class="btn btn-primary" onclick="handleSuggeriment()">Enviar suggeriment →</button>
         </div>
       </div>
@@ -1255,7 +1467,7 @@
         <a href="#inici">Inici</a>
         <a href="#calendari">Calendari</a>
         <a href="#colles">Colles</a>
-        <a href="#media">Fotos & Videos</a>
+        <a href="#galeria">Galeria</a>
         <a href="#socis">Socis</a>
       </div>
       <div class="footer-links">
@@ -1277,7 +1489,7 @@
 
   <!-- ==================== JAVASCRIPT ==================== -->
   <script>
-    // ---- Navbar scroll effect ----
+    // ---- Navbar scroll ----
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 50);
@@ -1288,69 +1500,96 @@
     const navLinks = document.querySelectorAll('.nav-links a');
     window.addEventListener('scroll', () => {
       let current = '';
-      sections.forEach(section => {
-        const top = section.offsetTop - 100;
-        if (scrollY >= top) current = section.getAttribute('id');
-      });
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
-          link.classList.add('active');
-        }
+      sections.forEach(s => { if (scrollY >= s.offsetTop - 100) current = s.id; });
+      navLinks.forEach(l => {
+        l.classList.remove('active');
+        if (l.getAttribute('href') === '#' + current) l.classList.add('active');
       });
     });
 
-    // ---- Hamburger menu ----
+    // ---- Hamburger ----
     const hamburger = document.getElementById('hamburger');
     const navLinksEl = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => {
-      navLinksEl.classList.toggle('open');
-    });
-    // Close menu on link click
-    navLinksEl.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => navLinksEl.classList.remove('open'));
-    });
+    hamburger.addEventListener('click', () => navLinksEl.classList.toggle('open'));
+    navLinksEl.querySelectorAll('a').forEach(l =>
+      l.addEventListener('click', () => navLinksEl.classList.remove('open'))
+    );
 
     // ---- Fade-in on scroll ----
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // ---- Toast notification ----
+    // ---- Carousel ----
+    const tracks = document.querySelectorAll('.carousel-track');
+    let currentSlide = 0;
+    let slideInterval;
+
+    // Create indicators
+    const indicatorsEl = document.getElementById('carouselIndicators');
+    tracks.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+      dot.addEventListener('click', () => goToSlide(i));
+      indicatorsEl.appendChild(dot);
+    });
+
+    function goToSlide(n) {
+      tracks[currentSlide].classList.remove('active');
+      document.querySelectorAll('.carousel-dot')[currentSlide].classList.remove('active');
+      currentSlide = (n + tracks.length) % tracks.length;
+      tracks[currentSlide].classList.add('active');
+      document.querySelectorAll('.carousel-dot')[currentSlide].classList.add('active');
+      resetAutoSlide();
+    }
+    function nextSlide() { goToSlide(currentSlide + 1); }
+    function prevSlide() { goToSlide(currentSlide - 1); }
+    function resetAutoSlide() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 5000);
+    }
+    slideInterval = setInterval(nextSlide, 5000);
+
+    // ---- Lightbox ----
+    function openLightbox(el) {
+      const img = el.querySelector('img');
+      document.getElementById('lightboxImg').src = img.src;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+    // ---- Toast ----
     function showToast(msg, type = 'success') {
-      const toast = document.getElementById('toast');
-      toast.textContent = msg;
-      toast.className = 'toast ' + type + ' show';
-      setTimeout(() => toast.classList.remove('show'), 3000);
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'toast ' + type + ' show';
+      setTimeout(() => t.classList.remove('show'), 3500);
     }
 
     // ---- Contact form ----
     function handleContactForm(e) {
       e.preventDefault();
-      // For demo, show a mailto link
-      showToast('Missatge enviat! (Demo — configura un backend per producció)', 'success');
+      showToast('Missatge enviat! (Demo — configura un backend per producció)');
       e.target.reset();
     }
 
-    // ---- Suggeriments form ----
+    // ---- Suggeriments ----
     function handleSuggeriment() {
       const text = document.getElementById('suggerText').value.trim();
-      if (!text) {
-        showToast('Si us plau, escriu el teu suggeriment.', 'error');
-        return;
-      }
-      showToast('Suggeriment enviat anònimament! (Demo)', 'success');
+      if (!text) { showToast('Si us plau, escriu el teu suggeriment.', 'error'); return; }
+      showToast('Suggeriment enviat anònimament! (Demo)');
       document.getElementById('suggerText').value = '';
     }
 
     // ---- Socis login ----
-    // SHA-256 hash of password for simple client-side auth (not cryptographically secure, just gate)
-    const SOCIS_HASH = '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'; // "123456" (canvia!)
+    const SOCIS_HASH = '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92';
 
     async function sha256(text) {
       const buffer = new TextEncoder().encode(text);
@@ -1363,11 +1602,9 @@
       document.getElementById('socisPassword').value = '';
       document.getElementById('socisError').classList.remove('show');
     }
-
     function closeSocisLogin() {
       document.getElementById('socisOverlay').classList.remove('active');
     }
-
     async function checkSocisPass() {
       const pass = document.getElementById('socisPassword').value;
       const hash = await sha256(pass);
@@ -1380,10 +1617,9 @@
         document.getElementById('socisError').classList.add('show');
       }
     }
-
     function logoutSocis() {
       document.getElementById('socisPrivate').classList.remove('active');
-      showToast('Has sortit de la zona de socis.', 'info');
+      showToast('Has sortit de la zona de socis.');
     }
   </script>
 
