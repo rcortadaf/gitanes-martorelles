@@ -99,45 +99,41 @@
       .nav-links a { padding: 12px 16px; width: 100%; border-radius: 8px; }
     }
 
-    /* ===================== HERO CAROUSEL ===================== */
+    /* ===================== HERO (STATIC) ===================== */
     .hero {
       position: relative;
       min-height: 100vh;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .carousel {
+    .hero-bg {
       position: absolute; inset: 0; z-index: 0;
     }
-    .carousel-track {
-      position: absolute; inset: 0;
-      transition: opacity 1s ease;
-    }
-    .carousel-track.active { opacity: 1; }
-    .carousel-track img {
+    .hero-bg img {
       width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center center;
-      filter: brightness(0.4);
+      filter: brightness(0.55);
     }
-    .carousel-overlay {
+    .hero-overlay {
       position: absolute; inset: 0; z-index: 1;
       background: linear-gradient(to bottom,
-        rgba(26,26,46,0.2) 0%,
-        rgba(26,26,46,0.5) 50%,
-        rgba(26,26,46,0.85) 100%
+        rgba(26,26,46,0.15) 0%,
+        rgba(26,26,46,0.55) 70%,
+        rgba(26,26,46,0.90) 100%
       );
     }
     .hero-content {
       position: relative; z-index: 2;
-      min-height: 100vh;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      text-align: center; padding: 100px 24px 60px;
-      color: white;
+      text-align: center; padding: 120px 24px 100px;
+      color: white; min-height: 100vh;
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(255,255,255,0.12); backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
       border: 1px solid rgba(255,255,255,0.15);
       padding: 8px 20px; border-radius: 50px;
       font-size: 0.85rem; font-weight: 500; margin-bottom: 28px;
@@ -192,38 +188,98 @@
     }
     .hero-stat .label { font-size: 0.85rem; opacity: 0.7; margin-top: 4px; }
 
-    /* Carousel indicators */
-    .carousel-indicators {
-      position: absolute; bottom: 30px; left: 50%;
-      transform: translateX(-50%); z-index: 3;
-      display: flex; gap: 8px;
-    }
-    .carousel-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-      background: rgba(255,255,255,0.3); border: none; cursor: pointer;
-      transition: var(--transition);
-    }
-    .carousel-dot.active { background: white; transform: scale(1.3); }
-
-    /* Carousel arrows */
-    .carousel-arrow {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      z-index: 3; background: rgba(0,0,0,0.3); border: none;
-      color: white; width: 48px; height: 48px; border-radius: 50%;
-      cursor: pointer; font-size: 1.3rem;
-      display: flex; align-items: center; justify-content: center;
-      transition: var(--transition); backdrop-filter: blur(4px);
-    }
-    .carousel-arrow:hover { background: rgba(0,0,0,0.5); }
-    .carousel-arrow.left { left: 20px; }
-    .carousel-arrow.right { right: 20px; }
-
     @media (max-width: 500px) {
       .hero-stats { gap: 20px; }
       .hero-stat .number { font-size: 1.8rem; }
-      .carousel-arrow { width: 36px; height: 36px; font-size: 1rem; }
-      .carousel-arrow.left { left: 10px; }
-      .carousel-arrow.right { right: 10px; }
+    }
+
+    /* ===================== CAROUSEL SECTION ===================== */
+    .carousel-section {
+      background: var(--dark);
+      padding: 60px 24px;
+      position: relative;
+    }
+    .carousel-section .section-header { margin-bottom: 32px; }
+    .carousel-section .section-label { color: var(--gold); }
+    .carousel-section .section-title { color: white; }
+    .carousel-section .section-desc { color: rgba(255,255,255,0.5); }
+    .carousel-container {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: var(--radius);
+      aspect-ratio: 16 / 9;
+    }
+    .carousel-track {
+      position: absolute; inset: 0;
+      transition: opacity 0.8s ease;
+      opacity: 0;
+    }
+    .carousel-track.active { opacity: 1; }
+    .carousel-track img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .carousel-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+      padding: 30px 20px 16px;
+      color: white;
+    }
+    .carousel-caption h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; margin-bottom: 2px;
+    }
+    .carousel-caption span { font-size: 0.8rem; opacity: 0.7; }
+    .carousel-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 5; background: rgba(0,0,0,0.5); border: none;
+      color: white; width: 44px; height: 44px; border-radius: 50%;
+      cursor: pointer; font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .carousel-nav:hover { background: rgba(0,0,0,0.7); }
+    .carousel-nav.prev { left: 16px; }
+    .carousel-nav.next { right: 16px; }
+    .carousel-dots {
+      display: flex; justify-content: center; gap: 8px;
+      margin-top: 16px;
+    }
+    .carousel-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.2); border: none; cursor: pointer;
+      transition: var(--transition);
+    }
+    .carousel-dot.active { background: var(--gold); transform: scale(1.2); }
+
+    /* ===================== BANNER INTERLUDE ===================== */
+    .banner-interlude {
+      position: relative; overflow: hidden;
+      padding: 80px 24px; text-align: center;
+      min-height: 400px;
+    }
+    .banner-interlude img.bg-img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; filter: brightness(0.3) blur(2px);
+    }
+    .banner-interlude .content {
+      position: relative; z-index: 1;
+      max-width: 700px; margin: 0 auto;
+    }
+    .banner-interlude h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900;
+      color: white; margin-bottom: 16px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .banner-interlude p {
+      color: rgba(255,255,255,0.9); font-size: 1.05rem; line-height: 1.7;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+    }
+    .banner-interlude .logo-50 {
+      max-width: 280px; margin: 28px auto 0;
+      display: block; filter: drop-shadow(0 4px 20px rgba(0,0,0,0.4));
     }
 
     /* ===================== SECTIONS COMMON ===================== */
@@ -398,61 +454,6 @@
       font-size: 0.82rem; color: var(--gray); line-height: 1.5;
     }
     .colla-trainings strong { color: var(--dark); }
-
-    /* ===================== BANNER/INTERLUDE ===================== */
-    .banner-interlude {
-      position: relative; overflow: hidden;
-      padding: 80px 24px; text-align: center; color: white;
-    }
-    .banner-interlude img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; filter: brightness(0.35) blur(1px);
-    }
-    .banner-interlude .content { position: relative; z-index: 1; }
-    .banner-interlude h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900;
-      margin-bottom: 16px;
-    }
-    .banner-interlude p { max-width: 600px; margin: 0 auto; opacity: 0.9; font-size: 1.1rem; }
-
-    /* ===================== GALLERY / MOSAIC ===================== */
-    .gallery-section { background: var(--white); }
-    .gallery-mosaic {
-      display: grid; gap: 12px;
-      grid-template-columns: repeat(4, 1fr);
-      grid-auto-rows: 200px;
-      grid-auto-flow: dense;
-    }
-    .gallery-item {
-      position: relative; overflow: hidden;
-      border-radius: var(--radius); cursor: pointer;
-    }
-    .gallery-item img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    .gallery-item:hover img { transform: scale(1.1); }
-    .gallery-item .gallery-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
-      opacity: 0; transition: opacity 0.3s ease;
-      display: flex; align-items: flex-end; padding: 16px;
-    }
-    .gallery-item:hover .gallery-overlay { opacity: 1; }
-    .gallery-overlay span { color: white; font-size: 0.85rem; font-weight: 600; }
-    /* Mosaic sizes */
-    .gallery-item.wide { grid-column: span 2; }
-    .gallery-item.tall { grid-row: span 2; }
-    .gallery-item.big { grid-column: span 2; grid-row: span 2; }
-
-    @media (max-width: 768px) {
-      .gallery-mosaic {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 160px;
-      }
-      .gallery-item.big { grid-column: span 2; grid-row: span 1; }
-    }
 
     /* ===================== MEDIA (SOCIAL) ===================== */
     .media-section {
@@ -747,32 +748,16 @@
     </div>
   </nav>
 
-  <!-- ==================== HERO CAROUSEL ==================== -->
+  <!-- ==================== HERO ==================== -->
   <section class="hero" id="inici">
-    <!-- Carousel images -->
-    <div class="carousel" id="carousel">
-      <div class="carousel-track active">
-        <img src="images/ballada-roda-martorelles.jpg" alt="Ballada de roda a Martorelles 2026" loading="eager">
-      </div>
-      <div class="carousel-track">
-        <img src="images/ballada-tossa-mar.jpg" alt="Ballada a Tossa de Mar 2026" loading="eager">
-      </div>
-      <div class="carousel-track">
-        <img src="images/ballada-llagosta.jpg" alt="Ballada a La Llagosta 2026" loading="eager">
-      </div>
-      <div class="carousel-track">
-        <img src="images/ballada-brunzit.jpg" alt="Festival Brunzit Martorelles" loading="eager">
-      </div>
-      <div class="carousel-track">
-        <img src="images/ballada-catalunya-miniatura.jpg" alt="Catalunya en Miniatura 2026" loading="eager">
-      </div>
-      <div class="carousel-overlay"></div>
+    <div class="hero-bg">
+      <img src="images/ballada-brunzit.jpg" alt="Ball de Gitanes de Martorelles" loading="eager">
     </div>
-
-    <!-- Hero content -->
+    <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-badge">
         <img src="images/logo-50-anys.png" alt="50è" style="width:24px;height:24px;object-fit:contain;">
+        <span class="dot"></span>
         50è Aniversari 2026
       </div>
       <h1>Agrupació Ball de Gitanes<br>de Martorelles</h1>
@@ -803,11 +788,41 @@
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Carousel controls -->
-    <button class="carousel-arrow left" onclick="prevSlide()" aria-label="Anterior">‹</button>
-    <button class="carousel-arrow right" onclick="nextSlide()" aria-label="Següent">›</button>
-    <div class="carousel-indicators" id="carouselIndicators"></div>
+  <!-- ==================== CAROUSEL ==================== -->
+  <section class="carousel-section" id="galeria-top">
+    <div class="section-header fade-in">
+      <div class="section-label">Galeria</div>
+      <h2 class="section-title">Imatges de les Ballades</h2>
+      <p class="section-desc">Els millors moments de la temporada</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="carousel-container">
+      <div class="carousel-track active">
+        <img src="images/ballada-roda-martorelles.jpg" alt="Ballada de roda a Martorelles" loading="lazy">
+        <div class="carousel-caption"><h3>Ballada de Roda</h3><span>Martorelles — Maig 2026</span></div>
+      </div>
+      <div class="carousel-track">
+        <img src="images/ballada-tossa-mar.jpg" alt="Ballada a Tossa de Mar" loading="lazy">
+        <div class="carousel-caption"><h3>Ballada a Tossa de Mar</h3><span>Abril 2026</span></div>
+      </div>
+      <div class="carousel-track">
+        <img src="images/ballada-llagosta.jpg" alt="Ballada a La Llagosta" loading="lazy">
+        <div class="carousel-caption"><h3>Ballada a La Llagosta</h3><span>50 Aniversari — Abril 2026</span></div>
+      </div>
+      <div class="carousel-track">
+        <img src="images/ballada-brunzit.jpg" alt="Festival Brunzit" loading="lazy">
+        <div class="carousel-caption"><h3>Festival Brunzit</h3><span>Martorelles amb Sa Colla de Labritja</span></div>
+      </div>
+      <div class="carousel-track">
+        <img src="images/ballada-catalunya-miniatura.jpg" alt="Catalunya en Miniatura" loading="lazy">
+        <div class="carousel-caption"><h3>Catalunya en Miniatura</h3><span>Torrelles de Llobregat — Març 2026</span></div>
+      </div>
+      <button class="carousel-nav prev" onclick="prevSlide()" aria-label="Anterior">‹</button>
+      <button class="carousel-nav next" onclick="nextSlide()" aria-label="Següent">›</button>
+    </div>
+    <div class="carousel-dots" id="carouselIndicators"></div>
   </section>
 
   <!-- ==================== NEWS ==================== -->
@@ -889,13 +904,12 @@
 
   <!-- ==================== BANNER INTERLUDE ==================== -->
   <section class="banner-interlude">
-    <img src="images/banner-baldomero.jpg" alt="Mestre Baldomero" loading="lazy">
+    <img class="bg-img" src="images/banner-baldomero.jpg" alt="Mestre Baldomero" loading="lazy">
     <div class="content fade-in">
       <h2>Mestre Baldomero Costa Olivellas</h2>
       <p>Creu de Sant Jordi, mestre de mestres del Ball de Gitanes.<br>
         El seu llegat viu en cada balladora i ballador de Martorelles.</p>
-      <img src="images/logo-50-anys-complet.png" alt="50è Aniversari"
-           style="max-width:300px;margin:24px auto 0;border-radius:12px;box-shadow:0 4px 30px rgba(0,0,0,0.3);" loading="lazy">
+      <img class="logo-50" src="images/logo-50-anys-complet.png" alt="50è Aniversari" loading="lazy">
     </div>
   </section>
 
@@ -1192,14 +1206,14 @@
             <div class="label">balladores i balladors</div>
             <div class="colla-trainings">
               <strong>Divendres 18:00–19:00</strong><br>
-              Escola Les Pruneres, Martorelles
+              C/ Escoles, 10 (seu entitat)
             </div>
           </div>
         </div>
 
         <div class="colla-card mitjans fade-in">
           <div class="colla-card-img">
-            <img src="images/colles-mitjanes-50.jpg" alt="Colla de Mitjanes" loading="lazy">
+            <img src="images/collades-mitjanes-50.jpg" alt="Colla de Mitjanes" loading="lazy">
             <span class="colla-badge">Mitjanes</span>
           </div>
           <div class="colla-card-body">
@@ -1208,14 +1222,14 @@
             <div class="label">balladores</div>
             <div class="colla-trainings">
               <strong>Divendres 19:00–20:00</strong><br>
-              Escola Les Pruneres, Martorelles
+              Sala La Vinya, Martorelles
             </div>
           </div>
         </div>
 
         <div class="colla-card joves fade-in">
           <div class="colla-card-img">
-            <img src="images/colles-joves-50.jpg" alt="Colla de Joves" loading="lazy">
+            <img src="images/collades-joves-50.jpg" alt="Colla de Joves" loading="lazy">
             <span class="colla-badge">Joves</span>
           </div>
           <div class="colla-card-body">
@@ -1224,14 +1238,14 @@
             <div class="label">balladores i balladors</div>
             <div class="colla-trainings">
               <strong>Divendres 20:00–21:00</strong><br>
-              Escola Les Pruneres, Martorelles
+              Sala La Vinya, Martorelles
             </div>
           </div>
         </div>
 
         <div class="colla-card grans fade-in">
           <div class="colla-card-img">
-            <img src="images/colles-grans-50.jpg" alt="Colla de Grans" loading="lazy">
+            <img src="images/collades-grans-50.jpg" alt="Colla de Grans" loading="lazy">
             <span class="colla-badge">Grans</span>
           </div>
           <div class="colla-card-body">
@@ -1240,7 +1254,7 @@
             <div class="label">balladores i balladors</div>
             <div class="colla-trainings">
               <strong>Divendres 21:30–22:30</strong><br>
-              Escola Les Pruneres, Martorelles
+              Sala La Vinya, Martorelles
             </div>
           </div>
         </div>
