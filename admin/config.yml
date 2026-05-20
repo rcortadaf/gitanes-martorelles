@@ -7,9 +7,11 @@ backend:
     update: "cms: actualitzar {{collection}}/{{slug}}"
     delete: "cms: esborrar {{collection}}/{{slug}}"
     uploadMedia: "cms: pujar imatge '{{path}}'"
+
 media_folder: "images"
 public_folder: "/images"
 site_url: "https://rcortadaf.github.io/gitanes-martorelles/"
+
 collections:
   - name: "site_content"
     label: "🌐 Contingut Web"
@@ -38,6 +40,7 @@ collections:
                 fields:
                   - { label: "Nombre", name: "number", widget: "string" }
                   - { label: "Etiqueta", name: "label", widget: "string" }
+
           # ==================== CAROUSEL ====================
           - label: "🖼️ Carousel"
             name: "carousel"
@@ -55,6 +58,7 @@ collections:
                   - { label: "Alt", name: "alt", widget: "string" }
                   - { label: "Títol", name: "title", widget: "string" }
                   - { label: "Peu", name: "caption", widget: "string" }
+
           # ==================== NOTÍCIES ====================
           - label: "📰 Capçalera Notícies"
             name: "news_header"
@@ -63,6 +67,7 @@ collections:
             fields:
               - { label: "Etiqueta", name: "label", widget: "string" }
               - { label: "Títol", name: "title", widget: "string" }
+
           - label: "📰 Llista Notícies"
             name: "news"
             widget: "list"
@@ -78,6 +83,7 @@ collections:
                 widget: "list"
                 allow_add: true
                 field: { label: "Item", name: "meta", widget: "string" }
+
           # ==================== BANNER ====================
           - label: "🎖️ Banner"
             name: "banner"
@@ -88,6 +94,7 @@ collections:
               - { label: "Títol", name: "title", widget: "string" }
               - { label: "Descripció", name: "description", widget: "text" }
               - { label: "Logo", name: "logo", widget: "image", required: false }
+
           # ==================== CALENDARI ====================
           - label: "📅 Capçalera Calendari"
             name: "calendar_section"
@@ -97,6 +104,7 @@ collections:
               - { label: "Etiqueta", name: "label", widget: "string" }
               - { label: "Títol", name: "title", widget: "string" }
               - { label: "Descripció", name: "description", widget: "string" }
+
           - label: "📅 Esdeveniments"
             name: "calendar_events"
             widget: "list"
@@ -114,6 +122,7 @@ collections:
                 allow_add: true
                 field: { label: "Colla", name: "colla", widget: "string" }
               - { label: "Destacat", name: "featured", widget: "boolean", default: false }
+
           # ==================== GALERIA ====================
           - label: "📷 Galeria"
             name: "gallery_section"
@@ -133,6 +142,7 @@ collections:
                     name: "size"
                     widget: "select"
                     options: [ "", "big", "tall", "wide" ]
+
           # ==================== COLLES ====================
           - label: "💃 Capçalera Colles"
             name: "colles_header"
@@ -142,6 +152,7 @@ collections:
               - { label: "Etiqueta", name: "label", widget: "string" }
               - { label: "Títol", name: "title", widget: "string" }
               - { label: "Descripció", name: "description", widget: "text" }
+
           - label: "💃 Llista Colles"
             name: "colles"
             widget: "list"
@@ -158,6 +169,7 @@ collections:
               - { label: "Etiqueta", name: "label", widget: "string" }
               - { label: "Horari", name: "training_schedule", widget: "string" }
               - { label: "Lloc", name: "training_location", widget: "string" }
+
           # ==================== SOCIAL ====================
           - label: "📱 Xarxes Socials"
             name: "social"
@@ -176,6 +188,7 @@ collections:
                   - { label: "Descripció", name: "description", widget: "text" }
                   - { label: "Handle", name: "handle", widget: "string" }
                   - { label: "URL", name: "url", widget: "string" }
+
           # ==================== SOCIS ====================
           - label: "👥 Socis"
             name: "socis"
@@ -200,6 +213,7 @@ collections:
                     name: "docs"
                     widget: "list"
                     field: { label: "Doc", name: "doc", widget: "string" }
+
           # ==================== CONTACTE ====================
           - label: "📧 Contacte"
             name: "contact"
@@ -226,6 +240,7 @@ collections:
               - { label: "Missatge label", name: "form_message_label", widget: "string" }
               - { label: "Missatge placeholder", name: "form_message_placeholder", widget: "string" }
               - { label: "Botó", name: "form_submit", widget: "string" }
+
           # ==================== SUGGERIMENTS ====================
           - label: "💡 Suggeriments"
             name: "suggeriments"
@@ -239,6 +254,7 @@ collections:
               - { label: "Descripció", name: "description", widget: "text" }
               - { label: "Placeholder", name: "placeholder", widget: "string" }
               - { label: "Botó", name: "submit_text", widget: "string" }
+
           # ==================== FOOTER ====================
           - label: "🔻 Footer"
             name: "footer"
