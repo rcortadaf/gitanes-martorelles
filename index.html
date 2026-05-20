@@ -6,6 +6,9 @@
   <title>Agrupació Ball de Gitanes de Martorelles</title>
   <meta name="description" content="Agrupació Ball de Gitanes de Martorelles — 50 anys de cultura popular, ball i tradició">
 
+  <!-- Content loaded from CMS -->
+  <script src="admin/data-manager.js"></script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -758,31 +761,35 @@
       <div class="hero-badge">
         <img src="images/logo-50-anys.png" alt="50è" style="width:24px;height:24px;object-fit:contain;">
         <span class="dot"></span>
-        50è Aniversari 2026
+        <span data-field="hero.badge">50è Aniversari 2026</span>
       </div>
-      <h1>Agrupació Ball de Gitanes<br>de Martorelles</h1>
-      <p>
+      <h1 data-field="hero.title">Agrupació Ball de Gitanes<br>de Martorelles</h1>
+      <p data-field="hero.description">
         92 balladores i balladors, 4 colles, i més de mig segle preservant
         la cultura popular i fent poble a cada ballada.
       </p>
       <div class="hero-buttons">
-        <a href="#calendari" class="btn btn-primary">📅 Properes Ballades</a>
-        <a href="#socis" class="btn btn-outline">👥 Fes-te Soci</a>
+        <a href="#calendari" class="btn btn-primary" data-href="hero.btn_primary_href">
+          <span data-field="hero.btn_primary_text">📅 Properes Ballades</span>
+        </a>
+        <a href="#socis" class="btn btn-outline" data-href="hero.btn_secondary_href">
+          <span data-field="hero.btn_secondary_text">👥 Fes-te Soci</span>
+        </a>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat">
+        <div class="hero-stat" data-field-type="hero-stat">
           <div class="number">92</div>
           <div class="label">Balladors/es</div>
         </div>
-        <div class="hero-stat">
+        <div class="hero-stat" data-field-type="hero-stat">
           <div class="number">4</div>
           <div class="label">Colles</div>
         </div>
-        <div class="hero-stat">
+        <div class="hero-stat" data-field-type="hero-stat">
           <div class="number">50</div>
           <div class="label">Anys</div>
         </div>
-        <div class="hero-stat">
+        <div class="hero-stat" data-field-type="hero-stat">
           <div class="number">12+</div>
           <div class="label">Ballades 2026</div>
         </div>
@@ -793,9 +800,9 @@
   <!-- ==================== CAROUSEL ==================== -->
   <section class="carousel-section" id="galeria-top">
     <div class="section-header fade-in">
-      <div class="section-label">Galeria</div>
-      <h2 class="section-title">Imatges de les Ballades</h2>
-      <p class="section-desc">Els millors moments de la temporada</p>
+      <div class="section-label" data-field="carousel.section_label">Galeria</div>
+      <h2 class="section-title" data-field="carousel.section_title">Imatges de les Ballades</h2>
+      <p class="section-desc" data-field="carousel.section_desc">Els millors moments de la temporada</p>
       <div class="section-divider"></div>
     </div>
     <div class="carousel-container">
@@ -829,8 +836,8 @@
   <section class="news-section">
     <div class="section" style="max-width:1200px;margin:0 auto;">
       <div class="section-header fade-in">
-        <div class="section-label">Notícies</div>
-        <h2 class="section-title">Últimes Novetats</h2>
+        <div class="section-label" data-field="news_header.label">Notícies</div>
+        <h2 class="section-title" data-field="news_header.title">Últimes Novetats</h2>
         <div class="section-divider"></div>
       </div>
       <div class="news-grid">
@@ -904,12 +911,12 @@
 
   <!-- ==================== BANNER INTERLUDE ==================== -->
   <section class="banner-interlude">
-    <img class="bg-img" src="images/banner-baldomero.jpg" alt="Mestre Baldomero" loading="lazy">
+    <img class="bg-img" src="images/banner-baldomero.jpg" alt="Mestre Baldomero" loading="lazy" data-attr="banner.bg-img">
     <div class="content fade-in">
-      <h2>Mestre Baldomero Costa Olivellas</h2>
-      <p>Creu de Sant Jordi, mestre de mestres del Ball de Gitanes.<br>
+      <h2 data-field="banner.title">Mestre Baldomero Costa Olivellas</h2>
+      <p data-field="banner.description">Creu de Sant Jordi, mestre de mestres del Ball de Gitanes.<br>
         El seu llegat viu en cada balladora i ballador de Martorelles.</p>
-      <img class="logo-50" src="images/logo-50-anys-complet.png" alt="50è Aniversari" loading="lazy">
+      <img class="logo-50" src="images/logo-50-anys-complet.png" alt="50è Aniversari" loading="lazy" data-attr="banner.logo">
     </div>
   </section>
 
@@ -917,9 +924,9 @@
   <section id="calendari">
     <div class="section">
       <div class="section-header fade-in">
-        <div class="section-label">Agenda 2026</div>
-        <h2 class="section-title">Calendari de Ballades</h2>
-        <p class="section-desc">Totes les dates on trobaràs el Ball de Gitanes de Martorelles</p>
+        <div class="section-label" data-field="calendar.label">Agenda 2026</div>
+        <h2 class="section-title" data-field="calendar.title">Calendari de Ballades</h2>
+        <p class="section-desc" data-field="calendar.description">Totes les dates on trobaràs el Ball de Gitanes de Martorelles</p>
         <div class="section-divider"></div>
       </div>
       <div class="cal-list">
@@ -1130,9 +1137,9 @@
   <section class="gallery-section" id="galeria">
     <div class="section" style="max-width:1200px;margin:0 auto;">
       <div class="section-header fade-in">
-        <div class="section-label">Fotos</div>
-        <h2 class="section-title">Galeria d'Imatges</h2>
-        <p class="section-desc">Els millors moments del Ball de Gitanes de Martorelles</p>
+        <div class="section-label" data-field="gallery.label">Fotos</div>
+        <h2 class="section-title" data-field="gallery.title">Galeria d'Imatges</h2>
+        <p class="section-desc" data-field="gallery.description">Els millors moments del Ball de Gitanes de Martorelles</p>
         <div class="section-divider"></div>
       </div>
       <div class="gallery-mosaic fade-in">
@@ -1186,9 +1193,9 @@
   <section id="colles">
     <div class="section">
       <div class="section-header fade-in">
-        <div class="section-label">Equips</div>
-        <h2 class="section-title">Les Nostres Colles</h2>
-        <p class="section-desc">
+        <div class="section-label" data-field="colles_header.label">Equips</div>
+        <h2 class="section-title" data-field="colles_header.title">Les Nostres Colles</h2>
+        <p class="section-desc" data-field="colles_header.description">
           92 balladores i balladors repartits en 4 colles, des de petits a grans
         </p>
         <div class="section-divider"></div>
@@ -1267,9 +1274,9 @@
   <section class="media-section" id="media">
     <div class="media-inner">
       <div class="section-header fade-in">
-        <div class="section-label" style="color:var(--gold);">Segueix-nos</div>
-        <h2 class="section-title" style="color:white;">Xarxes Socials</h2>
-        <p class="section-desc" style="color:rgba(255,255,255,0.6);">
+        <div class="section-label" style="color:var(--gold);" data-field="social.section_label">Segueix-nos</div>
+        <h2 class="section-title" style="color:white;" data-field="social.section_title">Xarxes Socials</h2>
+        <p class="section-desc" style="color:rgba(255,255,255,0.6);" data-field="social.section_desc">
           Descobreix les millors imatges i actuacions
         </p>
         <div class="section-divider"></div>
@@ -1305,21 +1312,21 @@
   <section class="socis-section" id="socis">
     <div class="section">
       <div class="section-header fade-in">
-        <div class="section-label">Participa</div>
-        <h2 class="section-title">Zona de Socis</h2>
-        <p class="section-desc">Forma part de la família del Ball de Gitanes de Martorelles</p>
+        <div class="section-label" data-field="socis.section_label">Participa</div>
+        <h2 class="section-title" data-field="socis.section_title">Zona de Socis</h2>
+        <p class="section-desc" data-field="socis.section_desc">Forma part de la família del Ball de Gitanes de Martorelles</p>
         <div class="section-divider"></div>
       </div>
 
       <div class="socis-public fade-in">
-        <div class="icon">👥</div>
-        <h3>Fes-te Soci!</h3>
-        <p>
+        <div class="icon" data-field="socis.cta_icon">👥</div>
+        <h3 data-field="socis.cta_title">Fes-te Soci!</h3>
+        <p data-field="socis.cta_description">
           Fent-te soci col·labores amb l'entitat i ajudes a preservar
           la cultura popular de Martorelles. Accedeix a avantatges exclusius.
         </p>
-        <a href="images/documentacio_alta_soci.pdf" class="btn btn-primary" download>
-          📄 Documentació Alta Soci
+        <a href="images/documentacio_alta_soci.pdf" class="btn btn-primary" download data-href="socis.cta_button_href">
+          <span data-field="socis.cta_button_text">📄 Documentació Alta Soci</span>
         </a>
       </div>
 
@@ -1371,9 +1378,9 @@
   <section id="contactar">
     <div class="section">
       <div class="section-header fade-in">
-        <div class="section-label">Contacte</div>
-        <h2 class="section-title">Parlem?</h2>
-        <p class="section-desc">Troba'ns o escriu-nos un missatge</p>
+        <div class="section-label" data-field="contact.section_label">Contacte</div>
+        <h2 class="section-title" data-field="contact.section_title">Parlem?</h2>
+        <p class="section-desc" data-field="contact.section_desc">Troba'ns o escriu-nos un missatge</p>
         <div class="section-divider"></div>
       </div>
       <div class="contact-grid">
@@ -1383,24 +1390,24 @@
           <div class="contact-card">
             <div class="contact-icon">📍</div>
             <div>
-              <h4>Adreça</h4>
-              <p>Carrer de les Escoles, 10<br>08107 Martorelles</p>
+              <h4 data-field="contact.address_title">Adreça</h4>
+              <p data-field="contact.address">Carrer de les Escoles, 10<br>08107 Martorelles</p>
             </div>
           </div>
 
           <div class="contact-card">
             <div class="contact-icon">📧</div>
             <div>
-              <h4>Correu electrònic</h4>
-              <p><a href="mailto:martorelles@balldegitanes.com" style="color:var(--primary);">martorelles@balldegitanes.com</a></p>
+              <h4 data-field="contact.email_title">Correu electrònic</h4>
+              <p><a href="mailto:martorelles@balldegitanes.com" style="color:var(--primary);" data-href="contact.email_href"><span data-field="contact.email">martorelles@balldegitanes.com</span></a></p>
             </div>
           </div>
 
           <div class="contact-card">
             <div class="contact-icon">🕐</div>
             <div>
-              <h4>Horaris d'Assaig 2026</h4>
-              <p>
+              <h4 data-field="contact.schedule_title">Horaris d'Assaig 2026</h4>
+              <p data-field="contact.schedule">
                 <strong>Petits:</strong> Divendres 18:00–19:00<br>
                 <strong>Mitjans:</strong> Divendres 19:00–20:00<br>
                 <strong>Joves:</strong> Divendres 20:00–21:00<br>
@@ -1443,14 +1450,14 @@
   <section class="sugger-section" id="suggeriments">
     <div class="section" style="max-width:1200px;margin:0 auto;">
       <div class="section-header fade-in">
-        <div class="section-label">Opinió</div>
-        <h2 class="section-title">Bústia de Suggeriments</h2>
+        <div class="section-label" data-field="suggeriments.section_label">Opinió</div>
+        <h2 class="section-title" data-field="suggeriments.section_title">Bústia de Suggeriments</h2>
         <div class="section-divider"></div>
       </div>
       <div class="sugger-card fade-in">
-        <div class="icon">💡</div>
-        <h3>La teva opinió importa</h3>
-        <p>
+        <div class="icon" data-field="suggeriments.icon">💡</div>
+        <h3 data-field="suggeriments.title">La teva opinió importa</h3>
+        <p data-field="suggeriments.description">
           La Junta del Ball de Gitanes de Martorelles treballem per preservar i fer créixer
           la cultura popular. Aquest espai és per a tu: escriu un suggeriment de
           millora de forma anònima.

@@ -1,0 +1,17 @@
+{
+  "hero": {
+    "badge": "50è Aniversari 2026",
+    "title": "Agrupació Ball de Gitanes<br>de Martorelles",
+    "description": "Més de 50 anys de cultura popular, ball i tradició. Quatre colles, una mateixa passió.",
+    "btn_primary_text": "📅 Properes Ballades",
+    "btn_primary_href": "#calendari",
+    "btn_secondary_text": "👥 Fes-te Soci",
+    "btn_secondary_href": "#socis",
+    "stats": [
+      {"number": "50+", "label": "Anys d'Història"},
+      {"number": "100+", "label": "Balladors i Balladores"},
+      {"number": "4", "label": "Colles Actives"},
+      {"number": "15+", "label": "Ballades a l'Any"}
+    ]
+  }
+}
