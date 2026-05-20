@@ -18,14 +18,11 @@ public_folder: "/images"
 collections:
   - name: "site_content"
     label: "🌐 Contingut Web"
-    files:
-      - name: "all_content"
-        label: "Contingut web"
-        file: "data/content.json"
-        format: "json"
-        fields:
-          # ==================== HERO ====================
-          - label: "🏠 Hero (Portada)"
+    file: "data/content.json"
+    format: "json"
+    fields:
+            # ==================== HERO ====================
+            - label: "🏠 Hero (Portada)"
             name: "hero"
             widget: "object"
             collapsed: true
@@ -47,8 +44,8 @@ collections:
                   - { label: "Nombre", name: "number", widget: "string" }
                   - { label: "Etiqueta", name: "label", widget: "string" }
 
-          # ==================== CAROUSEL ====================
-          - label: "🖼️ Carousel (Galeria superior)"
+            # ==================== CAROUSEL ====================
+            - label: "🖼️ Carousel (Galeria superior)"
             name: "carousel"
             widget: "object"
             collapsed: true
@@ -65,8 +62,8 @@ collections:
                   - { label: "Títol", name: "title", widget: "string" }
                   - { label: "Peu de foto", name: "caption", widget: "string" }
 
-          # ==================== NOTÍCIES ====================
-          - label: "📰 Notícies"
+            # ==================== NOTÍCIES ====================
+            - label: "📰 Notícies"
             name: "news_header"
             widget: "object"
             collapsed: true
@@ -74,7 +71,7 @@ collections:
               - { label: "Etiqueta", name: "label", widget: "string" }
               - { label: "Títol", name: "title", widget: "string" }
 
-          - label: "Llista Notícies"
+            - label: "Llista Notícies"
             name: "news"
             widget: "list"
             summary: "{{title}}"
@@ -90,8 +87,8 @@ collections:
                 allow_add: true
                 field: { label: "Item", name: "meta", widget: "string" }
 
-          # ==================== BANNER (Mestre Baldomero) ====================
-          - label: "🎖️ Banner (Mestre Baldomero)"
+            # ==================== BANNER (Mestre Baldomero) ====================
+            - label: "🎖️ Banner (Mestre Baldomero)"
             name: "banner"
             widget: "object"
             collapsed: true
@@ -102,8 +99,8 @@ collections:
               - { label: "Descripció", name: "description", widget: "text" }
               - { label: "Logo 50 Anys", name: "logo", widget: "image", required: false }
 
-          # ==================== CALENDARI ====================
-          - label: "📅 Capçalera Calendari"
+            # ==================== CALENDARI ====================
+            - label: "📅 Capçalera Calendari"
             name: "calendar_section"
             widget: "object"
             collapsed: true
@@ -112,7 +109,7 @@ collections:
               - { label: "Títol", name: "title", widget: "string" }
               - { label: "Descripció", name: "description", widget: "string" }
 
-          - label: "Esdeveniments Calendari"
+            - label: "Esdeveniments Calendari"
             name: "calendar_events"
             widget: "list"
             summary: "{{title}} ({{day}} {{month}})"
@@ -130,8 +127,8 @@ collections:
                 field: { label: "Colla", name: "colla", widget: "string" }
               - { label: "Destacat", name: "featured", widget: "boolean", required: false, default: false }
 
-          # ==================== GALERIA MOSAIC ====================
-          - label: "📷 Galeria Mosaic"
+            # ==================== GALERIA MOSAIC ====================
+            - label: "📷 Galeria Mosaic"
             name: "gallery_section"
             widget: "object"
             collapsed: true
@@ -156,8 +153,8 @@ collections:
                       - { label: "Ample", value: "wide" }
                     default: ""
 
-          # ==================== COLLES ====================
-          - label: "Capçalera Colles"
+            # ==================== COLLES ====================
+            - label: "Capçalera Colles"
             name: "colles_header"
             widget: "object"
             collapsed: true
@@ -166,7 +163,7 @@ collections:
               - { label: "Títol", name: "title", widget: "string" }
               - { label: "Descripció", name: "description", widget: "text" }
 
-          - label: "Llista Colles"
+            - label: "Llista Colles"
             name: "colles"
             widget: "list"
             summary: "{{name}}"
@@ -191,8 +188,8 @@ collections:
               - { label: "Horari assaig", name: "training_schedule", widget: "string" }
               - { label: "Lloc assaig", name: "training_location", widget: "string" }
 
-          # ==================== XARXES SOCIALS ====================
-          - label: "📱 Xarxes Socials"
+            # ==================== XARXES SOCIALS ====================
+            - label: "📱 Xarxes Socials"
             name: "social"
             widget: "object"
             collapsed: true
@@ -211,8 +208,8 @@ collections:
                   - { label: "Handle / Etiqueta", name: "handle", widget: "string" }
                   - { label: "URL", name: "url", widget: "string" }
 
-          # ==================== ZONA SOCIS ====================
-          - label: "👥 Zona de Socis"
+            # ==================== ZONA SOCIS ====================
+            - label: "👥 Zona de Socis"
             name: "socis"
             widget: "object"
             collapsed: true
@@ -237,8 +234,8 @@ collections:
                     allow_add: true
                     field: { label: "Document", name: "doc", widget: "string" }
 
-          # ==================== CONTACTE ====================
-          - label: "📧 Contacte"
+            # ==================== CONTACTE ====================
+            - label: "📧 Contacte"
             name: "contact"
             widget: "object"
             collapsed: true
@@ -264,8 +261,8 @@ collections:
               - { label: "Placeholder Missatge", name: "form_message_placeholder", widget: "string" }
               - { label: "Text Botó Enviar", name: "form_submit", widget: "string" }
 
-          # ==================== SUGGERIMENTS ====================
-          - label: "💡 Bústia de Suggeriments"
+            # ==================== SUGGERIMENTS ====================
+            - label: "💡 Bústia de Suggeriments"
             name: "suggeriments"
             widget: "object"
             collapsed: true
@@ -278,8 +275,8 @@ collections:
               - { label: "Placeholder Textarea", name: "placeholder", widget: "string" }
               - { label: "Text Botó", name: "submit_text", widget: "string" }
 
-          # ==================== FOOTER ====================
-          - label: "🔻 Footer"
+            # ==================== FOOTER ====================
+            - label: "🔻 Footer"
             name: "footer"
             widget: "object"
             collapsed: true
