@@ -13,5 +13,167 @@
       {"number": "4", "label": "Colles Actives"},
       {"number": "15+", "label": "Ballades a l'Any"}
     ]
+  },
+  "carousel": {
+    "section_label": "Galeria",
+    "section_title": "Imatges de les Ballades",
+    "section_desc": "Els millors moments de la temporada",
+    "slides": [
+      {"image": "images/hero-bg.jpg", "alt": "Ball de Gitanes de Martorelles", "title": "Ball de Gitanes", "caption": "Tradició i passió des de 1976"},
+      {"image": "images/collades-grans-50.jpg", "alt": "Colla de Grans", "title": "Colla de Grans", "caption": "L'esperit de la tradició"},
+      {"image": "images/colles-petits-50.jpg", "alt": "Colla de Petits", "title": "Colla de Petits", "caption": "El futur de la dansa"},
+      {"image": "images/collades-joves-50.jpg", "alt": "Colla de Joves", "title": "Colla de Joves", "caption": "Energia i tradició"}
+    ]
+  },
+  "news_header": {
+    "label": "Notícies",
+    "title": "Últimes Novetats"
+  },
+  "news": [
+    {
+      "image": "images/news-50-anys.webp",
+      "image_caption": "Celebració 50è aniversari",
+      "date": "Març 2026",
+      "title": "50è Aniversari del Ball de Gitanes de Martorelles",
+      "body": "Celebrem mig segle de trajectòria ininterrompuda amb activitats especials, ballades commemoratives i el reconeixement institucional. Un camí de més de 50 anys que ha portat la dansa de Martorelles arreu.",
+      "meta": ["📍 Martorelles", "🎉 50è Aniversari"]
+    },
+    {
+      "image": "images/collades-mitjanes-50.jpg",
+      "image_caption": "Colla de Mitjanes",
+      "date": "Gener 2026",
+      "title": "Inici de Temporada 2026",
+      "body": "Totes quatre colles ja estan en marxa per a la nova temporada. Assaigs setmanals, nova coreografia per al 50è aniversari i un calendari ple de ballades per tot Catalunya.",
+      "meta": ["📍 Martorelles", "🎵 Temporada 2026"]
+    },
+    {
+      "image": "images/catalunya-en-miniatura.jpg",
+      "image_caption": "Catalunya en Miniatura",
+      "date": "Desembre 2025",
+      "title": "Ballada a Catalunya en Miniatura",
+      "body": "Les colles del Ball de Gitanes de Martorelles van ballar a Catalunya en Miniatura, portant la nostra dansa tradicional a un espai únic del Baix Llobregat.",
+      "meta": ["📍 Torrelles de Llobregat", "🏛️ Catalunya en Miniatura"]
+    }
+  ],
+  "banner": {
+    "image": "images/banner-baldomero.jpg",
+    "alt": "Mestre Baldomero",
+    "title": "Mestre Baldomero Costa Olivellas",
+    "description": "Creu de Sant Jordi, mestre de mestres del Ball de Gitanes.<br>Un llegat que perdura en cada pas, en cada ballador i balladora.",
+    "logo": "images/logo-50-anys-complet.png"
+  },
+  "calendar_section": {
+    "label": "Agenda 2026",
+    "title": "Calendari de Ballades",
+    "description": "Totes les dates on trobaràs el Ball de Gitanes de Martorelles"
+  },
+  "calendar_events": [
+    {"day": "1", "month": "MAIG", "title": "Ballada de Primavera — Festa Major", "location": "📍 Plaça Major, Martorelles", "time": "🕐 12:00 - 13:30", "description": "Ballada dins la Festa Major, actuació de totes les colles.", "colles": ["Petits", "Mitjanes", "Joves", "Grans"], "featured": true},
+    {"day": "15", "month": "JUNY", "title": "Trobada de Balls de Gitanes", "location": "📍 Sant Pol de Mar", "time": "🕐 11:00", "description": "Trobada de colles de Gitanes de tot Catalunya.", "colles": ["Grans", "Joves"], "featured": false},
+    {"day": "29", "month": "JUNY", "title": "Festa Major de Martorelles", "location": "📍 Diversos llocs, Martorelles", "time": "🕐 Tot el dia", "description": "Actuació especial amb motiu de la Festa Major del poble.", "colles": ["Petits", "Mitjanes", "Joves", "Grans"], "featured": true},
+    {"day": "12", "month": "JULIOL", "title": "Ballada d'Estiu", "location": "📍 Plaça de la Vila, Martorelles", "time": "🕐 20:00", "description": "Ballada nocturna dins el programa d'estiu.", "colles": ["Grans"], "featured": false},
+    {"day": "15", "month": "AGOST", "title": "Festa Major d'Estiu — Festa del Barri", "location": "📍 Plaça Major, Martorelles", "time": "🕐 18:00", "description": "Actuació de totes les colles.", "colles": ["Petits", "Mitjanes", "Joves", "Grans"], "featured": false},
+    {"day": "24", "month": "SETEMBRE", "title": "La Mercè — Ballada a Barcelona", "location": "📍 Barcelona", "time": "🕐 11:30", "description": "Dins les festes de la Mercè, ballada a la ciutat comtal.", "colles": ["Grans", "Joves"], "featured": false},
+    {"day": "11", "month": "OCTUBRE", "title": "Diada Nacional de Catalunya", "location": "📍 Martorelles", "time": "🕐 12:00", "description": "Actuació especial amb motiu de l'11 de Setembre.", "colles": ["Petits", "Mitjanes", "Joves", "Grans"], "featured": false},
+    {"day": "7", "month": "DESEMBRE", "title": "Diada del Ball de Gitanes", "location": "📍 Seu Entitat, Martorelles", "time": "🕐 18:00 - 20:00", "description": "Diada pròpia del Ball de Gitanes de Martorelles amb exhibició i sopar de germanor.", "colles": ["Petits", "Mitjanes", "Joves", "Grans"], "featured": true}
+  ],
+  "gallery_section": {
+    "label": "Fotos",
+    "title": "Galeria d'Imatges",
+    "description": "Els millors moments del Ball de Gitanes de Martorelles",
+    "items": [
+      {"image": "images/hero-bg.jpg", "caption": "Ball de Gitanes en acció", "size": "big"},
+      {"image": "images/collades-grans-50.jpg", "caption": "Colla de Grans", "size": ""},
+      {"image": "images/colles-petits-50.jpg", "caption": "Colla de Petits", "size": ""},
+      {"image": "images/collades-joves-50.jpg", "caption": "Colla de Joves", "size": "tall"},
+      {"image": "images/collades-mitjanes-50.jpg", "caption": "Colla de Mitjanes", "size": ""},
+      {"image": "images/banner-baldomero.jpg", "caption": "Mestre Baldomero", "size": "wide"}
+    ]
+  },
+  "colles_header": {
+    "label": "Equips",
+    "title": "Les Nostres Colles",
+    "description": "Quatre colles per a totes les edats. Des dels més petits fins als més veterans,\ntothom té el seu lloc al Ball de Gitanes de Martorelles."
+  },
+  "colles": [
+    {"name": "Colla de Petits", "badge": "Petits", "image": "images/colles-petits-50.jpg", "alt": "Colla de Petits", "member_class": "petits", "count": "21", "label": "balladores i balladors", "training_schedule": "Divendres 18:00–19:00", "training_location": "C/ Escoles, 10 (seu entitat)"},
+    {"name": "Colla de Mitjanes", "badge": "Mitjanes", "image": "images/collades-mitjanes-50.jpg", "alt": "Colla de Mitjanes", "member_class": "mitjans", "count": "13", "label": "balladores", "training_schedule": "Divendres 19:00–20:00", "training_location": "Sala La Vinya, Martorelles"},
+    {"name": "Colla de Joves", "badge": "Joves", "image": "images/collades-joves-50.jpg", "alt": "Colla de Joves", "member_class": "joves", "count": "25", "label": "balladores i balladors", "training_schedule": "Divendres 20:00–21:00", "training_location": "Sala La Vinya, Martorelles"},
+    {"name": "Colla de Grans", "badge": "Grans", "image": "images/collades-grans-50.jpg", "alt": "Colla de Grans", "member_class": "grans", "count": "33", "label": "balladores i balladors", "training_schedule": "Divendres 21:30–22:30", "training_location": "Sala La Vinya, Martorelles"}
+  ],
+  "social": {
+    "section_label": "Segueix-nos",
+    "section_title": "Xarxes Socials",
+    "section_desc": "Descobreix les millors imatges i actuacions",
+    "channels": [
+      {"icon": "📸", "name": "Instagram", "description": "Fotos i reels de ballades, assajos i moments especials.", "handle": "@gitanesmartorelles", "url": "https://www.instagram.com/gitanesmartorelles/"},
+      {"icon": "▶️", "name": "YouTube", "description": "Videos complets de les nostres actuacions i esdeveniments.", "handle": "Canal Oficial", "url": "https://www.youtube.com/channel/UCmYF1_oOoCkWxVrquBvrPGg"},
+      {"icon": "📘", "name": "Facebook", "description": "Novetats, esdeveniments i la comunitat del Ball de Gitanes.", "handle": "Pàgina Oficial", "url": "https://www.facebook.com/152651568249680"}
+    ]
+  },
+  "socis": {
+    "section_label": "Participa",
+    "section_title": "Zona de Socis",
+    "section_desc": "Forma part de la família del Ball de Gitanes de Martorelles",
+    "cta_icon": "👥",
+    "cta_title": "Fes-te Soci!",
+    "cta_description": "Fent-te soci col·labores amb l'entitat i ajudes a preservar\nla cultura popular de Martorelles. Accedeix a avantatges exclusius.",
+    "cta_button_text": "📄 Documentació Alta Soci",
+    "cta_button_href": "images/documentacio_alta_soci.pdf",
+    "private_area": {
+      "title": "Documents Interns",
+      "docs": ["📋 Acta Assemblea General 2025", "📊 Pressupost 2026", "📝 Estatuts de l'Agrupació", "📞 Directori Junta Directiva"]
+    }
+  },
+  "contact": {
+    "section_label": "Contacte",
+    "section_title": "Parlem?",
+    "section_desc": "Troba'ns o escriu-nos un missatge",
+    "address_title": "Adreça",
+    "address": "Carrer de les Escoles, 10<br>08107 Martorelles",
+    "email_title": "Correu electrònic",
+    "email": "martorelles@balldegitanes.com",
+    "email_href": "mailto:martorelles@balldegitanes.com",
+    "schedule_title": "Horaris d'Assaig 2026",
+    "schedule": "<strong>Petits:</strong> Divendres 18:00–19:00<br><strong>Mitjans:</strong> Divendres 19:00–20:00<br><strong>Joves:</strong> Divendres 20:00–21:00<br><strong>Grans:</strong> Divendres 21:30–22:30<br><em style=\"font-size:0.78rem;color:var(--gray);\">Escola Les Pruneres, Martorelles</em>",
+    "form_title": "✉️ Envia'ns un missatge",
+    "form_name_label": "Nom *",
+    "form_name_placeholder": "El teu nom...",
+    "form_email_label": "Correu electrònic *",
+    "form_email_placeholder": "nom@exemple.com",
+    "form_subject_label": "Assumpte *",
+    "form_subject_placeholder": "De què ens vols parlar?...",
+    "form_message_label": "Missatge *",
+    "form_message_placeholder": "Escriu el teu missatge...",
+    "form_submit": "Enviar missatge →"
+  },
+  "suggeriments": {
+    "section_label": "Opinió",
+    "section_title": "Bústia de Suggeriments",
+    "icon": "💡",
+    "title": "La teva opinió importa",
+    "description": "La Junta del Ball de Gitanes de Martorelles treballem per preservar i fer créixer\nla cultura popular. Aquest espai és per a tu: escriu un suggeriment de\nmillora de forma anònima.",
+    "placeholder": "Escriu el teu suggeriment...",
+    "submit_text": "Enviar suggeriment →"
+  },
+  "footer": {
+    "brand_title": "💃 Gitanes Martorelles",
+    "brand_description": "Agrupació Ball de Gitanes de Martorelles. 50 anys de cultura popular, ball i tradició.",
+    "navigation_title": "Navegació",
+    "navigation": [
+      {"label": "Inici", "href": "#inici"},
+      {"label": "Calendari", "href": "#calendari"},
+      {"label": "Colles", "href": "#colles"},
+      {"label": "Galeria", "href": "#galeria"},
+      {"label": "Socis", "href": "#socis"}
+    ],
+    "contact_title": "Contacte",
+    "contact_links": [
+      {"label": "Formulari de contacte", "href": "#contactar"},
+      {"label": "Bústia de suggeriments", "href": "#suggeriments"},
+      {"label": "martorelles@balldegitanes.com", "href": "mailto:martorelles@balldegitanes.com"},
+      {"label": "Web original", "href": "https://www.balldegitanes.com"}
+    ],
+    "copyright": "© 2026 Agrupació Ball de Gitanes de Martorelles. Tots els drets reservats.<br>Redisseny creat amb ❤️ per a la colla"
   }
 }
