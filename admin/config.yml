@@ -3,275 +3,262 @@ backend:
   repo: rcortadaf/gitanes-martorelles
   branch: main
   commit_messages:
-    create: "cms: crear {{slug}}"
+    create: "cms: crear {{collection}}/{{slug}}"
     update: "cms: actualitzar {{collection}}/{{slug}}"
     delete: "cms: esborrar {{collection}}/{{slug}}"
     uploadMedia: "cms: pujar imatge '{{path}}'"
-
 media_folder: "images"
 public_folder: "/images"
 site_url: "https://rcortadaf.github.io/gitanes-martorelles/"
-
 collections:
   - name: "site_content"
     label: "🌐 Contingut Web"
-    file: "data/content.json"
-    format: "json"
-    fields:
-      # ==================== HERO ====================
-      - label: "🏠 Hero (Portada)"
-        name: "hero"
-        widget: "object"
-        collapsed: true
+    files:
+      - name: "all_content"
+        label: "Contingut"
+        file: "data/content.json"
+        format: "json"
         fields:
-          - { label: "Badge", name: "badge", widget: "string" }
-          - { label: "Títol", name: "title", widget: "text" }
-          - { label: "Descripció", name: "description", widget: "text" }
-          - { label: "Text Botó Principal", name: "btn_primary_text", widget: "string" }
-          - { label: "URL Botó Principal", name: "btn_primary_href", widget: "string" }
-          - { label: "Text Botó Secundari", name: "btn_secondary_text", widget: "string" }
-          - { label: "URL Botó Secundari", name: "btn_secondary_href", widget: "string" }
-          - label: "Estadístiques"
-            name: "stats"
-            widget: "list"
-            fields:
-              - { label: "Nombre", name: "number", widget: "string" }
-              - { label: "Etiqueta", name: "label", widget: "string" }
-
-      # ==================== CAROUSEL ====================
-      - label: "🖼️ Carousel"
-        name: "carousel"
-        widget: "object"
-        collapsed: true
-        fields:
-          - { label: "Etiqueta", name: "section_label", widget: "string" }
-          - { label: "Títol", name: "section_title", widget: "string" }
-          - { label: "Descripció", name: "section_desc", widget: "string" }
-          - label: "Slides"
-            name: "slides"
-            widget: "list"
-            fields:
-              - { label: "Imatge", name: "image", widget: "image" }
-              - { label: "Alt", name: "alt", widget: "string" }
-              - { label: "Títol", name: "title", widget: "string" }
-              - { label: "Peu", name: "caption", widget: "string" }
-
-      # ==================== NOTÍCIES ====================
-      - label: "📰 Capçalera Notícies"
-        name: "news_header"
-        widget: "object"
-        collapsed: true
-        fields:
-          - { label: "Etiqueta", name: "label", widget: "string" }
-          - { label: "Títol", name: "title", widget: "string" }
-
-      - label: "📰 Llista Notícies"
-        name: "news"
-        widget: "list"
-        summary: "{{title}}"
-        fields:
-          - { label: "Imatge", name: "image", widget: "image", required: false }
-          - { label: "Peu foto", name: "image_caption", widget: "string", required: false }
-          - { label: "Data", name: "date", widget: "string" }
-          - { label: "Títol", name: "title", widget: "string" }
-          - { label: "Cos", name: "body", widget: "text" }
-          - label: "Meta"
-            name: "meta"
-            widget: "list"
-            allow_add: true
-            field: { label: "Item", name: "meta", widget: "string" }
-
-      # ==================== BANNER ====================
-      - label: "🎖️ Banner"
-        name: "banner"
-        widget: "object"
-        collapsed: true
-        fields:
-          - { label: "Imatge Fons", name: "image", widget: "image", required: false }
-          - { label: "Títol", name: "title", widget: "string" }
-          - { label: "Descripció", name: "description", widget: "text" }
-          - { label: "Logo", name: "logo", widget: "image", required: false }
-
-      # ==================== CALENDARI ====================
-      - label: "📅 Capçalera Calendari"
-        name: "calendar_section"
-        widget: "object"
-        collapsed: true
-        fields:
-          - { label: "Etiqueta", name: "label", widget: "string" }
-          - { label: "Títol", name: "title", widget: "string" }
-          - { label: "Descripció", name: "description", widget: "string" }
-
-      - label: "📅 Esdeveniments"
-        name: "calendar_events"
-        widget: "list"
-        summary: "{{title}} ({{day}} {{month}})"
-        fields:
-          - { label: "Dia", name: "day", widget: "string", required: false }
-          - { label: "Mes", name: "month", widget: "string" }
-          - { label: "Títol", name: "title", widget: "string" }
-          - { label: "Ubicació", name: "location", widget: "string", required: false }
-          - { label: "Hora", name: "time", widget: "string", required: false }
-          - { label: "Descripció", name: "description", widget: "text", required: false }
-          - label: "Colles"
-            name: "colles"
-            widget: "list"
-            allow_add: true
-            field: { label: "Colla", name: "colla", widget: "string" }
-          - { label: "Destacat", name: "featured", widget: "boolean", default: false }
-
-      # ==================== GALERIA ====================
-      - label: "📷 Galeria"
-        name: "gallery_section"
-        widget: "object"
-        collapsed: true
-        fields:
-          - { label: "Etiqueta", name: "label", widget: "string" }
-          - { label: "Títol", name: "title", widget: "string" }
-          - { label: "Descripció", name: "description", widget: "string" }
-          - label: "Imatges"
-            name: "items"
-            widget: "list"
-            fields:
-              - { label: "Imatge", name: "image", widget: "image" }
-              - { label: "Peu", name: "caption", widget: "string" }
-              - label: "Mida"
-                name: "size"
-                widget: "select"
-                options: ["", "big", "tall", "wide"]
-
-      # ==================== COLLES ====================
-      - label: "💃 Capçalera Colles"
-        name: "colles_header"
-        widget: "object"
-        collapsed: true
-        fields:
-          - { label: "Etiqueta", name: "label", widget: "string" }
-          - { label: "Títol", name: "title", widget: "string" }
-          - { label: "Descripció", name: "description", widget: "text" }
-
-      - label: "💃 Llista Colles"
-        name: "colles"
-        widget: "list"
-        summary: "{{name}}"
-        fields:
-          - { label: "Nom", name: "name", widget: "string" }
-          - { label: "Badge", name: "badge", widget: "string" }
-          - { label: "Imatge", name: "image", widget: "image", required: false }
-          - label: "Classe CSS"
-            name: "member_class"
-            widget: "select"
-            options: ["petits", "mitjans", "joves", "grans"]
-          - { label: "Nombre", name: "count", widget: "string" }
-          - { label: "Etiqueta", name: "label", widget: "string" }
-          - { label: "Horari", name: "training_schedule", widget: "string" }
-          - { label: "Lloc", name: "training_location", widget: "string" }
-
-      # ==================== SOCIAL ====================
-      - label: "📱 Xarxes Socials"
-        name: "social"
-        widget: "object"
-        collapsed: true
-        fields:
-          - { label: "Etiqueta", name: "section_label", widget: "string" }
-          - { label: "Títol", name: "section_title", widget: "string" }
-          - { label: "Descripció", name: "section_desc", widget: "string" }
-          - label: "Canals"
-            name: "channels"
-            widget: "list"
-            fields:
-              - { label: "Icona", name: "icon", widget: "string" }
-              - { label: "Nom", name: "name", widget: "string" }
-              - { label: "Descripció", name: "description", widget: "text" }
-              - { label: "Handle", name: "handle", widget: "string" }
-              - { label: "URL", name: "url", widget: "string" }
-
-      # ==================== SOCIS ====================
-      - label: "👥 Socis"
-        name: "socis"
-        widget: "object"
-        collapsed: true
-        fields:
-          - { label: "Etiqueta", name: "section_label", widget: "string" }
-          - { label: "Títol", name: "section_title", widget: "string" }
-          - { label: "Descripció", name: "section_desc", widget: "string" }
-          - { label: "Icona", name: "cta_icon", widget: "string" }
-          - { label: "Títol CTA", name: "cta_title", widget: "string" }
-          - { label: "Descripció CTA", name: "cta_description", widget: "text" }
-          - { label: "Text Botó", name: "cta_button_text", widget: "string" }
-          - { label: "URL PDF", name: "cta_button_href", widget: "string" }
-          - label: "Àrea Privada"
-            name: "private_area"
+          # ==================== HERO ====================
+          - label: "🏠 Hero (Portada)"
+            name: "hero"
             widget: "object"
             collapsed: true
             fields:
-              - { label: "Títol", name: "title", widget: "string" }
-              - label: "Documents"
-                name: "docs"
+              - { label: "Badge", name: "badge", widget: "string" }
+              - { label: "Títol", name: "title", widget: "text" }
+              - { label: "Descripció", name: "description", widget: "text" }
+              - { label: "Text Botó Principal", name: "btn_primary_text", widget: "string" }
+              - { label: "URL Botó Principal", name: "btn_primary_href", widget: "string" }
+              - { label: "Text Botó Secundari", name: "btn_secondary_text", widget: "string" }
+              - { label: "URL Botó Secundari", name: "btn_secondary_href", widget: "string" }
+              - label: "Estadístiques"
+                name: "stats"
                 widget: "list"
-                field: { label: "Doc", name: "doc", widget: "string" }
-
-      # ==================== CONTACTE ====================
-      - label: "📧 Contacte"
-        name: "contact"
-        widget: "object"
-        collapsed: true
-        fields:
-          - { label: "Etiqueta", name: "section_label", widget: "string" }
-          - { label: "Títol", name: "section_title", widget: "string" }
-          - { label: "Descripció", name: "section_desc", widget: "string" }
-          - { label: "Adreça Títol", name: "address_title", widget: "string" }
-          - { label: "Adreça", name: "address", widget: "text" }
-          - { label: "Email Títol", name: "email_title", widget: "string" }
-          - { label: "Correu", name: "email", widget: "string" }
-          - { label: "URL Email", name: "email_href", widget: "string" }
-          - { label: "Horaris Títol", name: "schedule_title", widget: "string" }
-          - { label: "Horaris", name: "schedule", widget: "text" }
-          - { label: "Formulari Títol", name: "form_title", widget: "string" }
-          - { label: "Nom label", name: "form_name_label", widget: "string" }
-          - { label: "Nom placeholder", name: "form_name_placeholder", widget: "string" }
-          - { label: "Email label", name: "form_email_label", widget: "string" }
-          - { label: "Email placeholder", name: "form_email_placeholder", widget: "string" }
-          - { label: "Assumpte label", name: "form_subject_label", widget: "string" }
-          - { label: "Assumpte placeholder", name: "form_subject_placeholder", widget: "string" }
-          - { label: "Missatge label", name: "form_message_label", widget: "string" }
-          - { label: "Missatge placeholder", name: "form_message_placeholder", widget: "string" }
-          - { label: "Botó", name: "form_submit", widget: "string" }
-
-      # ==================== SUGGERIMENTS ====================
-      - label: "💡 Suggeriments"
-        name: "suggeriments"
-        widget: "object"
-        collapsed: true
-        fields:
-          - { label: "Etiqueta", name: "section_label", widget: "string" }
-          - { label: "Títol", name: "section_title", widget: "string" }
-          - { label: "Icona", name: "icon", widget: "string" }
-          - { label: "Títol CTA", name: "title", widget: "string" }
-          - { label: "Descripció", name: "description", widget: "text" }
-          - { label: "Placeholder", name: "placeholder", widget: "string" }
-          - { label: "Botó", name: "submit_text", widget: "string" }
-
-      # ==================== FOOTER ====================
-      - label: "🔻 Footer"
-        name: "footer"
-        widget: "object"
-        collapsed: true
-        fields:
-          - { label: "Títol", name: "brand_title", widget: "string" }
-          - { label: "Descripció", name: "brand_description", widget: "text" }
-          - { label: "Navegació Títol", name: "navigation_title", widget: "string" }
-          - label: "Links Navegació"
-            name: "navigation"
-            widget: "list"
+                fields:
+                  - { label: "Nombre", name: "number", widget: "string" }
+                  - { label: "Etiqueta", name: "label", widget: "string" }
+          # ==================== CAROUSEL ====================
+          - label: "🖼️ Carousel"
+            name: "carousel"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Etiqueta", name: "section_label", widget: "string" }
+              - { label: "Títol", name: "section_title", widget: "string" }
+              - { label: "Descripció", name: "section_desc", widget: "string" }
+              - label: "Slides"
+                name: "slides"
+                widget: "list"
+                fields:
+                  - { label: "Imatge", name: "image", widget: "image" }
+                  - { label: "Alt", name: "alt", widget: "string" }
+                  - { label: "Títol", name: "title", widget: "string" }
+                  - { label: "Peu", name: "caption", widget: "string" }
+          # ==================== NOTÍCIES ====================
+          - label: "📰 Capçalera Notícies"
+            name: "news_header"
+            widget: "object"
+            collapsed: true
             fields:
               - { label: "Etiqueta", name: "label", widget: "string" }
-              - { label: "URL", name: "href", widget: "string" }
-          - { label: "Contacte Títol", name: "contact_title", widget: "string" }
-          - label: "Links Contacte"
-            name: "contact_links"
+              - { label: "Títol", name: "title", widget: "string" }
+          - label: "📰 Llista Notícies"
+            name: "news"
             widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "Imatge", name: "image", widget: "image", required: false }
+              - { label: "Peu foto", name: "image_caption", widget: "string", required: false }
+              - { label: "Data", name: "date", widget: "string" }
+              - { label: "Títol", name: "title", widget: "string" }
+              - { label: "Cos", name: "body", widget: "text" }
+              - label: "Meta"
+                name: "meta"
+                widget: "list"
+                allow_add: true
+                field: { label: "Item", name: "meta", widget: "string" }
+          # ==================== BANNER ====================
+          - label: "🎖️ Banner"
+            name: "banner"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Imatge Fons", name: "image", widget: "image", required: false }
+              - { label: "Títol", name: "title", widget: "string" }
+              - { label: "Descripció", name: "description", widget: "text" }
+              - { label: "Logo", name: "logo", widget: "image", required: false }
+          # ==================== CALENDARI ====================
+          - label: "📅 Capçalera Calendari"
+            name: "calendar_section"
+            widget: "object"
+            collapsed: true
             fields:
               - { label: "Etiqueta", name: "label", widget: "string" }
-              - { label: "URL", name: "href", widget: "string" }
-          - { label: "Copyright", name: "copyright", widget: "text" }
+              - { label: "Títol", name: "title", widget: "string" }
+              - { label: "Descripció", name: "description", widget: "string" }
+          - label: "📅 Esdeveniments"
+            name: "calendar_events"
+            widget: "list"
+            summary: "{{title}} ({{day}} {{month}})"
+            fields:
+              - { label: "Dia", name: "day", widget: "string", required: false }
+              - { label: "Mes", name: "month", widget: "string" }
+              - { label: "Títol", name: "title", widget: "string" }
+              - { label: "Ubicació", name: "location", widget: "string", required: false }
+              - { label: "Hora", name: "time", widget: "string", required: false }
+              - { label: "Descripció", name: "description", widget: "text", required: false }
+              - label: "Colles"
+                name: "colles"
+                widget: "list"
+                allow_add: true
+                field: { label: "Colla", name: "colla", widget: "string" }
+              - { label: "Destacat", name: "featured", widget: "boolean", default: false }
+          # ==================== GALERIA ====================
+          - label: "📷 Galeria"
+            name: "gallery_section"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Etiqueta", name: "label", widget: "string" }
+              - { label: "Títol", name: "title", widget: "string" }
+              - { label: "Descripció", name: "description", widget: "string" }
+              - label: "Imatges"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Imatge", name: "image", widget: "image" }
+                  - { label: "Peu", name: "caption", widget: "string" }
+                  - label: "Mida"
+                    name: "size"
+                    widget: "select"
+                    options: [ "", "big", "tall", "wide" ]
+          # ==================== COLLES ====================
+          - label: "💃 Capçalera Colles"
+            name: "colles_header"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Etiqueta", name: "label", widget: "string" }
+              - { label: "Títol", name: "title", widget: "string" }
+              - { label: "Descripció", name: "description", widget: "text" }
+          - label: "💃 Llista Colles"
+            name: "colles"
+            widget: "list"
+            summary: "{{name}}"
+            fields:
+              - { label: "Nom", name: "name", widget: "string" }
+              - { label: "Badge", name: "badge", widget: "string" }
+              - { label: "Imatge", name: "image", widget: "image", required: false }
+              - label: "Classe CSS"
+                name: "member_class"
+                widget: "select"
+                options: [ "petits", "mitjans", "joves", "grans" ]
+              - { label: "Nombre", name: "count", widget: "string" }
+              - { label: "Etiqueta", name: "label", widget: "string" }
+              - { label: "Horari", name: "training_schedule", widget: "string" }
+              - { label: "Lloc", name: "training_location", widget: "string" }
+          # ==================== SOCIAL ====================
+          - label: "📱 Xarxes Socials"
+            name: "social"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Etiqueta", name: "section_label", widget: "string" }
+              - { label: "Títol", name: "section_title", widget: "string" }
+              - { label: "Descripció", name: "section_desc", widget: "string" }
+              - label: "Canals"
+                name: "channels"
+                widget: "list"
+                fields:
+                  - { label: "Icona", name: "icon", widget: "string" }
+                  - { label: "Nom", name: "name", widget: "string" }
+                  - { label: "Descripció", name: "description", widget: "text" }
+                  - { label: "Handle", name: "handle", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
+          # ==================== SOCIS ====================
+          - label: "👥 Socis"
+            name: "socis"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Etiqueta", name: "section_label", widget: "string" }
+              - { label: "Títol", name: "section_title", widget: "string" }
+              - { label: "Descripció", name: "section_desc", widget: "string" }
+              - { label: "Icona", name: "cta_icon", widget: "string" }
+              - { label: "Títol CTA", name: "cta_title", widget: "string" }
+              - { label: "Descripció CTA", name: "cta_description", widget: "text" }
+              - { label: "Text Botó", name: "cta_button_text", widget: "string" }
+              - { label: "URL PDF", name: "cta_button_href", widget: "string" }
+              - label: "Àrea Privada"
+                name: "private_area"
+                widget: "object"
+                collapsed: true
+                fields:
+                  - { label: "Títol", name: "title", widget: "string" }
+                  - label: "Documents"
+                    name: "docs"
+                    widget: "list"
+                    field: { label: "Doc", name: "doc", widget: "string" }
+          # ==================== CONTACTE ====================
+          - label: "📧 Contacte"
+            name: "contact"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Etiqueta", name: "section_label", widget: "string" }
+              - { label: "Títol", name: "section_title", widget: "string" }
+              - { label: "Descripció", name: "section_desc", widget: "string" }
+              - { label: "Adreça Títol", name: "address_title", widget: "string" }
+              - { label: "Adreça", name: "address", widget: "text" }
+              - { label: "Email Títol", name: "email_title", widget: "string" }
+              - { label: "Correu", name: "email", widget: "string" }
+              - { label: "URL Email", name: "email_href", widget: "string" }
+              - { label: "Horaris Títol", name: "schedule_title", widget: "string" }
+              - { label: "Horaris", name: "schedule", widget: "text" }
+              - { label: "Formulari Títol", name: "form_title", widget: "string" }
+              - { label: "Nom label", name: "form_name_label", widget: "string" }
+              - { label: "Nom placeholder", name: "form_name_placeholder", widget: "string" }
+              - { label: "Email label", name: "form_email_label", widget: "string" }
+              - { label: "Email placeholder", name: "form_email_placeholder", widget: "string" }
+              - { label: "Assumpte label", name: "form_subject_label", widget: "string" }
+              - { label: "Assumpte placeholder", name: "form_subject_placeholder", widget: "string" }
+              - { label: "Missatge label", name: "form_message_label", widget: "string" }
+              - { label: "Missatge placeholder", name: "form_message_placeholder", widget: "string" }
+              - { label: "Botó", name: "form_submit", widget: "string" }
+          # ==================== SUGGERIMENTS ====================
+          - label: "💡 Suggeriments"
+            name: "suggeriments"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Etiqueta", name: "section_label", widget: "string" }
+              - { label: "Títol", name: "section_title", widget: "string" }
+              - { label: "Icona", name: "icon", widget: "string" }
+              - { label: "Títol CTA", name: "title", widget: "string" }
+              - { label: "Descripció", name: "description", widget: "text" }
+              - { label: "Placeholder", name: "placeholder", widget: "string" }
+              - { label: "Botó", name: "submit_text", widget: "string" }
+          # ==================== FOOTER ====================
+          - label: "🔻 Footer"
+            name: "footer"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Títol", name: "brand_title", widget: "string" }
+              - { label: "Descripció", name: "brand_description", widget: "text" }
+              - { label: "Navegació Títol", name: "navigation_title", widget: "string" }
+              - label: "Links Navegació"
+                name: "navigation"
+                widget: "list"
+                fields:
+                  - { label: "Etiqueta", name: "label", widget: "string" }
+                  - { label: "URL", name: "href", widget: "string" }
+              - { label: "Contacte Títol", name: "contact_title", widget: "string" }
+              - label: "Links Contacte"
+                name: "contact_links"
+                widget: "list"
+                fields:
+                  - { label: "Etiqueta", name: "label", widget: "string" }
+                  - { label: "URL", name: "href", widget: "string" }
+              - { label: "Copyright", name: "copyright", widget: "text" }
