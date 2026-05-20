@@ -31,7 +31,7 @@ collections:
             collapsed: true
             fields:
               - { label: "Badge", name: "badge", widget: "string" }
-              - { label: "Títol", name: "title", widget: "markdown", minimal: true, modes: ["raw"] }
+              - { label: "Títol", name: "title", widget: "text" }
               - { label: "Descripció", name: "description", widget: "text" }
               - { label: "Text Botó Principal", name: "btn_primary_text", widget: "string" }
               - { label: "URL Botó Principal", name: "btn_primary_href", widget: "string" }
@@ -99,7 +99,7 @@ collections:
               - { label: "Imatge de Fons", name: "image", widget: "image", required: false }
               - { label: "Text Alt", name: "alt", widget: "string", required: false }
               - { label: "Títol", name: "title", widget: "string" }
-              - { label: "Descripció", name: "description", widget: "markdown", minimal: true, modes: ["raw"] }
+              - { label: "Descripció", name: "description", widget: "text" }
               - { label: "Logo 50 Anys", name: "logo", widget: "image", required: false }
 
           # ==================== CALENDARI ====================
@@ -247,12 +247,12 @@ collections:
               - { label: "Títol Secció", name: "section_title", widget: "string" }
               - { label: "Descripció Secció", name: "section_desc", widget: "string" }
               - { label: "Títol Adreça", name: "address_title", widget: "string" }
-              - { label: "Adreça", name: "address", widget: "markdown", minimal: true, modes: ["raw"] }
+              - { label: "Adreça", name: "address", widget: "text" }
               - { label: "Títol Email", name: "email_title", widget: "string" }
               - { label: "Correu electrònic", name: "email", widget: "string" }
               - { label: "URL Email", name: "email_href", widget: "string" }
               - { label: "Títol Horaris", name: "schedule_title", widget: "string" }
-              - { label: "Horaris", name: "schedule", widget: "markdown", minimal: true, modes: ["raw"] }
+              - { label: "Horaris", name: "schedule", widget: "text" }
               - { label: "Títol Formulari", name: "form_title", widget: "string" }
               - { label: "Etiqueta Nom", name: "form_name_label", widget: "string" }
               - { label: "Placeholder Nom", name: "form_name_placeholder", widget: "string" }
